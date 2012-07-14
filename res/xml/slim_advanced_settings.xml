@@ -39,6 +39,14 @@
         android:fragment="com.android.settings.cyanogenmod.superuser.PolicyNativeFragment"
         android:title="@string/superuser" />
 
-   
+    <!-- Believeupdater -->
+    <PreferenceScreen
+        android:key="about"
+        android:title="Changelog/Features">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.believe.info"
+            android:targetClass="com.believe.info.AboutActivity" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

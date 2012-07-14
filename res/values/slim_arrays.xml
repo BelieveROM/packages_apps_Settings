@@ -1152,6 +1152,7 @@
         <item>@string/shortcut_action_back</item>
         <item>@string/shortcut_action_app</item>
         <item>@string/shortcut_action_home</item>
+        <item>@string/shortcut_action_expanded_desktop</item>
         <item>@string/shortcut_action_kill</item>
         <item>@string/shortcut_action_lastapp</item>
         <item>@string/shortcut_action_menu</item>
@@ -1169,6 +1170,7 @@
     <string-array name="shortcut_action_values" translatable="false">
         <item>**back**</item>
         <item>**app**</item>
+        <item>**expanded_desktop**</item>
         <item>**home**</item>
         <item>**kill**</item>
         <item>**lastapp**</item>
@@ -1186,6 +1188,7 @@
 
     <string-array name="shortcut_action_navring_entries">
         <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_expanded_desktop</item>
         <item>@string/shortcut_action_kill</item>
         <item>@string/shortcut_action_lastapp</item>
         <item>@string/shortcut_action_notifications</item>
@@ -1203,6 +1206,7 @@
 
     <string-array name="shortcut_action_navring_values" translatable="false">
         <item>**app**</item>
+        <item>**expanded_desktop**</item>
         <item>**kill**</item>
         <item>**lastapp**</item>
         <item>**notifications**</item>
@@ -1348,6 +1352,26 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+     <!-- Stylus Gestures -->
+    <string-array name="gestures_entries">
+        <item>@string/gestures_action_empty</item>
+        <item>@string/gestures_action_home</item>
+        <item>@string/gestures_action_back</item>
+        <item>@string/gestures_action_menu</item>
+        <item>@string/gestures_action_search</item>
+        <item>@string/gestures_action_recent</item>
+    </string-array>
+
+    <string-array name="gestures_values" translatable="false">
+        <item>1000</item>
+        <item>1001</item>
+        <item>1002</item>
+        <item>1003</item>
+        <item>1004</item>
+        <item>1005</item>
+    </string-array>
+
 
    
 </resources>
