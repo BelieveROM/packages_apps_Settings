@@ -276,6 +276,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
             }
 
+            // visible error pattern
+            mVisibleErrorPattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_ERROR_PATTERN);
+
+            // visible dots
+            mVisibleDots = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_DOTS);
+
             // lock instantly on power key press
             mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
                     KEY_POWER_INSTANTLY_LOCKS);
