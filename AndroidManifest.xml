@@ -1647,7 +1647,14 @@
 
         <activity android:name=".believe.SystemSettings" />
 
+
         <activity android:name=".believe.PowerMenu" />
+
+        <activity android:name=".cyanogenmod.LockscreenTargets" />
+
+        <activity android:name=".cyanogenmod.LockscreenInterface" />
+
+     
 
         <!-- believe activities End -->
 
