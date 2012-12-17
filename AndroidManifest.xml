@@ -1561,6 +1561,7 @@
         <activity android:name=".slim.PowerMenu" />
         <activity android:name=".slim.NotificationDrawerSettings" />
         <activity android:name=".slim.quicksettings.QuickSettings" />
+        <activity android:name=".slim.NotificationDrawerStyle" />
 
      
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
