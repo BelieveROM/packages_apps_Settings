@@ -20,7 +20,6 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import android.content.Context;
-import android.net.wimax.WimaxHelper;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -57,7 +56,8 @@ public class QuickSettingsUtil {
     public static final String TILE_FLASHLIGHT = "toggleFlashlight";
     public static final String TILE_SLEEP = "toggleSleepMode";
     public static final String TILE_LTE = "toggleLte";
-    public static final String TILE_WIMAX = "toggleWimax";
+    public static final String TILE_REBOOT = "toggleReboot";
+
 
     private static final String TILE_DELIMITER = "|";
     private static final String TILES_DEFAULT = TILE_USER
@@ -105,9 +105,15 @@ public class QuickSettingsUtil {
         TILES.put(TILE_MOBILENETWORK, new QuickSettingsUtil.TileInfo(
                 TILE_MOBILENETWORK, R.string.title_tile_mobilenetwork,
                 "com.android.systemui:drawable/ic_qs_signal_4"));
+        TILES.put(TILE_NETWORKMODE, new QuickSettingsUtil.TileInfo(
+                TILE_NETWORKMODE, R.string.title_tile_networkmode,
+                "com.android.systemui:drawable/ic_qs_2g3g_on"));
         TILES.put(TILE_AUTOROTATE, new QuickSettingsUtil.TileInfo(
                 TILE_AUTOROTATE, R.string.title_tile_autorotate,
                 "com.android.systemui:drawable/ic_qs_auto_rotate"));
+        TILES.put(TILE_REBOOT, new QuickSettingsUtil.TileInfo(
+                TILE_REBOOT, R.string.title_tile_reboot,
+                "com.android.systemui:drawable/ic_qs_reboot"));
         TILES.put(TILE_SETTINGS, new QuickSettingsUtil.TileInfo(
                 TILE_SETTINGS, R.string.title_tile_settings,
                 "com.android.systemui:drawable/ic_qs_settings"));
@@ -123,9 +129,6 @@ public class QuickSettingsUtil {
         TILES.put(TILE_USER, new QuickSettingsUtil.TileInfo(
                 TILE_USER, R.string.title_tile_user,
                 "com.android.systemui:drawable/ic_qs_default_user"));
-        TILES.put(TILE_NETWORKMODE, new QuickSettingsUtil.TileInfo(
-                TILE_NETWORKMODE, R.string.title_tile_networkmode,
-                "com.android.systemui:drawable/ic_qs_2g3g_on"));
 
 // These toggles are not available yet.  Comment out for now
 //        TILES.put(TILE_SCREENTIMEOUT, new QuickSettingsUtil.TileInfo(
