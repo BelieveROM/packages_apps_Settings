@@ -1571,9 +1571,13 @@
         <activity android:name=".slim.StatusBarBatteryStyle" />
         <activity android:name=".slim.LockscreenTargets" />
         <activity android:name=".slim.LockscreenInterface" />
+        <activity android:name=".slim.NavbarSettings" />
+        <activity android:name=".slim.NavRingTargets" />
+        <activity android:name=".slim.NavbarButtonSettings" />
+        <activity android:name=".slim.NavbarStyleDimenSettings" />
+        
+
        
-      
-     
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
