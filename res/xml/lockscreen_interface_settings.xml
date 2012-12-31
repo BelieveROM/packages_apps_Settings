@@ -36,6 +36,22 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+       android:key="lockscreen_widgets_group"
+       android:title="@string/lockscreen_widgets_category">
+
+         <CheckBoxPreference
+            android:key="lockscreen_all_widgets"
+            android:title="@string/lockscreen_widgets_title"
+            android:summary="@string/lockscreen_widgets_summary" />
+
+         <CheckBoxPreference
+            android:key="lockscreen_camera_widget"
+            android:title="@string/lockscreen_camera_widget_title"
+            android:summary="@string/lockscreen_camera_widget_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
        android:key="security_group"
        android:title="@string/lockscreen_security_grouptitle">
 
@@ -79,11 +95,9 @@
             android:entryValues="@array/lockscreen_battery_status_values"
             android:defaultValue="0" />
 
-
          <CheckBoxPreference
             android:key="lockscreen_camera_widget"
             android:title="@string/lockscreen_camera_widget_title" />
-
 
     </PreferenceCategory>
 
