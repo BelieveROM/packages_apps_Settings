@@ -74,6 +74,12 @@
             android:entryValues="@array/lockscreen_battery_status_values"
             android:defaultValue="0" />
 
+
+         <CheckBoxPreference
+            android:key="lockscreen_camera_widget"
+            android:title="@string/lockscreen_camera_widget_title" />
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>
