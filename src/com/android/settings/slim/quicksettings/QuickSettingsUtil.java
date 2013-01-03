@@ -16,13 +16,10 @@
 
 package com.android.settings.slim.quicksettings;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -58,12 +55,8 @@ public class QuickSettingsUtil {
     public static final String TILE_LTE = "toggleLte";
     public static final String TILE_REBOOT = "toggleReboot";
     public static final String TILE_NFC = "toggleNfc";
-<<<<<<< HEAD
-
-=======
     public static final String TILE_FAVCONTACT = "toggleFavoriteContact";
     public static final String TILE_FCHARGE = "toggleFCharge";
->>>>>>> bf03477... Settings: Add fast charge QS toggle and other
 
     private static final String TILE_DELIMITER = "|";
     private static final String TILES_DEFAULT = TILE_USER
@@ -98,7 +91,7 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_fcharge_off", true));
         TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
                 TILE_FAVCONTACT, R.string.title_tile_favcontact,
-                "com.android.systemui:drawable/ic_qs_default_user", false));
+                "com.android.systemui:drawable/ic_qs_fav_contact", false));
         TILES.put(TILE_SLEEP, new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep", true));
@@ -153,7 +146,7 @@ public class QuickSettingsUtil {
         TILES.put(TILE_WIFIAP, new QuickSettingsUtil.TileInfo(
                 TILE_WIFIAP, R.string.title_tile_wifiap,
                 "com.android.systemui:drawable/ic_qs_wifi_ap_neutral", true));
-       
+
 // These toggles are not available yet.  Comment out for now
 //        TILES.put(TILE_SYNC, new QuickSettingsUtil.TileInfo(
 //                TILE_SYNC, R.string.title_tile_sync,
@@ -233,6 +226,7 @@ public class QuickSettingsUtil {
         private int mTitleResId;
         private String mIcon;
         private boolean mSingleton;
+        private int occurences = 0;
 
         public TileInfo(String id, int titleResId, String icon, boolean singleton) {
             mId = id;
@@ -255,6 +249,14 @@ public class QuickSettingsUtil {
 
         public String getIcon() {
             return mIcon;
+        }
+
+        public void setOccurences(int nb){
+            this.occurences = nb;
+        }
+
+        public int getOccurences(){
+            return occurences;
         }
     }
 }
