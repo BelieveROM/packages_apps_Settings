@@ -15,15 +15,26 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.content.ContentResolver;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class LockscreenInterface extends SettingsPreferenceFragment {
     private static final String TAG = "LockscreenInterface";
+
+
+    private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
+
+   
+    private CheckBoxPreference mMaximizeWidgets;
+
 
     public boolean hasButtons() {
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
@@ -35,6 +46,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
     }
+
 
     @Override
     public void onResume() {
@@ -49,5 +61,40 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+
+
+        mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
+        if (Utils.isTablet(getActivity())) {
+            getPreferenceScreen().removePreference(mMaximizeWidgets);
+            mMaximizeWidgets = null;
+        } else {
+            mMaximizeWidgets.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ContentResolver cr = getActivity().getContentResolver();
+        
+
+        if (mMaximizeWidgets != null) {
+            mMaximizeWidgets.setChecked(Settings.System.getInt(cr,
+                    Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        ContentResolver cr = getActivity().getContentResolver();
+
+        if (preference == mMaximizeWidgets) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, value ? 1 : 0);
+            return true;
+        }
+        return false;
+
     }
 }
