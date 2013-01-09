@@ -104,7 +104,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
 
         if (!Utils.isPhone(getActivity())) {
-            mGeneralSettings.removePreference(mQuickPulldown);
+            if(mQuickPulldown != null)
+                mGeneralSettings.removePreference(mQuickPulldown);
         } else {
 
             mQuickPulldown.setChecked(Settings.System.getInt(resolver, Settings.System.QS_QUICK_PULLDOWN, 0) == 1);
@@ -132,8 +133,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 
         // Add the network mode preference
         mNetworkMode = (ListPreference) prefSet.findPreference(EXP_NETWORK_MODE);
-        mNetworkMode.setSummary(mNetworkMode.getEntry());
-        mNetworkMode.setOnPreferenceChangeListener(this);
+        if(mNetworkMode != null){
+            mNetworkMode.setSummary(mNetworkMode.getEntry());
+            mNetworkMode.setOnPreferenceChangeListener(this);
+        }
 
         // Screen timeout mode
         mScreenTimeoutMode = (ListPreference) prefSet.findPreference(EXP_SCREENTIMEOUT_MODE);
@@ -156,7 +159,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
             QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_MOBILEDATA);
             QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_WIFIAP);
             QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_NETWORKMODE);
-            mStaticTiles.removePreference(mNetworkMode);
+            if(mNetworkMode != null)
+                mStaticTiles.removePreference(mNetworkMode);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_WIFIAP);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_MOBILEDATA);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_NETWORKMODE);
         } else {
             // We have telephony support however, some phones run on networks not supported
             // by the networkmode tile so remove both it and the associated options list
@@ -184,7 +191,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 
         // Don't show the bluetooth options if not supported
         if (BluetoothAdapter.getDefaultAdapter() == null) {
-            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_BLUETOOTH);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_BLUETOOTH);
         }
 
 
