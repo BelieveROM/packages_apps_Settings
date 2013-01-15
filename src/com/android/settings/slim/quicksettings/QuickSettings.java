@@ -18,8 +18,11 @@ package com.android.settings.slim.quicksettings;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.WifiDisplayStatus;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -61,6 +64,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private static final String COLLAPSE_PANEL = "collapse_panel";
     private static final String GENERAL_SETTINGS = "pref_general_settings";
     private static final String STATIC_TILES = "static_tiles";
+    private static final String DYNAMIC_TILES = "pref_dynamic_tiles";
 
     public static final String FAST_CHARGE_DIR = "/sys/kernel/fast_charge";
     public static final String FAST_CHARGE_FILE = "force_fast_charge";
@@ -74,12 +78,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     CheckBoxPreference mDynamicIme;
     CheckBoxPreference mQuickPulldown;
     CheckBoxPreference mCollapsePanel;
-<<<<<<< HEAD
-=======
     ListPreference mQuickPulldown;
     PreferenceCategory mGeneralSettings;
     PreferenceCategory mStaticTiles;
->>>>>>> 4a09a02... Settings: QS improvements
+    PreferenceCategory mDynamicTiles;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         ContentResolver resolver = getActivity().getContentResolver();
         mGeneralSettings = (PreferenceCategory) prefSet.findPreference(GENERAL_SETTINGS);
         mStaticTiles = (PreferenceCategory) prefSet.findPreference(STATIC_TILES);
+        mDynamicTiles = (PreferenceCategory) prefSet.findPreference(DYNAMIC_TILES);
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
 
         if (!Utils.isPhone(getActivity())) {
@@ -152,6 +155,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         mDynamicIme.setChecked(Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_IME, 1) == 1);
         mDynamicWifi = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_WIFI);
         mDynamicWifi.setChecked(Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_WIFI, 1) == 1);
+
+        if (!deviceSupportsWifiDisplay()) {
+            mDynamicTiles.removePreference(mDynamicWifi);
+        }
 
         // Don't show mobile data options if not supported
         boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
@@ -332,4 +339,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
             return val.toString().split(SEPARATOR);
         }
     }
+
+    private boolean deviceSupportsWifiDisplay() {
+        DisplayManager dm = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+        return (dm.getWifiDisplayStatus().getFeatureState() != WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE);
+    }
+
 }
