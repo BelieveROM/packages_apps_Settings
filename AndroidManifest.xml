@@ -1565,6 +1565,7 @@
         <activity android:name=".slim.PowerMenu" />
         <activity android:name=".slim.NotificationDrawerSettings" />
         <activity android:name=".slim.quicksettings.QuickSettings" />
+        <activity android:name=".slim.quicksettings.QuickSettingsTilesStyle" />
         <activity android:name=".slim.NotificationDrawerStyle" />
         <activity android:name=".slim.StatusBar" />
         <activity android:name=".slim.StatusBarStyle" />
