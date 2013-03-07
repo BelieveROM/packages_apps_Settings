@@ -33,10 +33,12 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -230,6 +232,17 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         }
 
 
+        // Dont show the LTE tile if not supported
+        if (!deviceSupportsLte()) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_LTE);
+        }
+
+        // Dont show the torch tile if not supported
+        if (!getResources().getBoolean(R.bool.has_led_flash)) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_TORCH);
+        }
+
+
         // Dont show fast charge tile if not supported
         File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
         if (!fastcharge.exists()) {
@@ -372,6 +385,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private boolean deviceSupportsWifiDisplay() {
         DisplayManager dm = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
         return (dm.getWifiDisplayStatus().getFeatureState() != WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE);
+    }
+
+    private boolean deviceSupportsLte() {
+        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        return (tm.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE) || tm.getLteOnGsmMode() != 0;
     }
 
 }
