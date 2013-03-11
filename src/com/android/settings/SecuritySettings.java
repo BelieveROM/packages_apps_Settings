@@ -282,6 +282,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // visible dots
             mVisibleDots = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_DOTS);
 
+        if (isSlimSecurity) {
+
             // lock instantly on power key press
             mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
                     KEY_POWER_INSTANTLY_LOCKS);
