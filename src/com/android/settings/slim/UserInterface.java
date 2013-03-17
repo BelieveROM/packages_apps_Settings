@@ -111,7 +111,9 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         } else if (preference == mHighEndGfx) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HIGH_END_GFX_ENABLED,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+                    (Boolean) newValue ? 1 : 0);
+            mHighEndGfx.setChecked((Boolean)newValue);
+
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
