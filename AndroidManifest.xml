@@ -1581,10 +1581,21 @@
         <activity android:name=".slim.NavbarStyleDimenSettings" />
         <activity android:name=".slim.NavBarStyle" />
         <activity android:name=".slim.NavBarButtonStyle" />
-       
 
      
-        <!-- Pseudo-activity used to provide an intent-filter entry point to ass display rotation config -->
+
+        <activity android:name="Settings$PowerMenuSettingsActivity"
+            android:label="@string/power_menu_title"
+            android:excludeFromRecents="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.slim.PowerMenu" />
+        </activity>
+
+  
         <activity android:name="Settings$ASSDisplayRotationActivity"
                 android:label="@string/display_rotation_title">
             <intent-filter>
@@ -1595,7 +1606,6 @@
                 android:value="com.android.settings.slim.DisplayRotation" />
         </activity>
 
-        <!-- Pseudo-activity used to provide an intent-filter entry point to ass lockscreen config -->
         <activity android:name="Settings$ASSLockscreenActivity"
                 android:label="@string/lock_screen_title">
             <intent-filter>
@@ -1606,7 +1616,7 @@
                 android:value="com.android.settings.slim.LockscreenInterface" />
         </activity>
 
-        <!-- Pseudo-activity used to provide an intent-filter entry point to quick settings tiles config -->
+      
         <activity android:name="Settings$QuickSettingsTilesActivity"
                 android:label="@string/tile_picker_title">
             <intent-filter>
