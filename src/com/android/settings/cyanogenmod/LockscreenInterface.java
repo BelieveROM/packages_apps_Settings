@@ -17,10 +17,7 @@ package com.android.settings.cyanogenmod;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.preference.CheckBoxPreference;
-=======
->>>>>>> 83f0e11... Settings: Add option to always show battery status on lockscreen (2/2)
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -30,7 +27,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class LockscreenInterface extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class LockscreenInterface extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
 
 
@@ -51,6 +49,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
 
+        // Battery status
         mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
         mBatteryStatus.setOnPreferenceChangeListener(this);
 
@@ -67,11 +66,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         super.onPause();
 
         // Set the battery status description text
+
         if (mBatteryStatus != null) {
             int batteryStatus = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, 0);
             mBatteryStatus.setValueIndex(batteryStatus);
             mBatteryStatus.setSummary(mBatteryStatus.getEntries()[batteryStatus]);
+            mBatteryStatus.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -105,8 +106,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         ContentResolver cr = getActivity().getContentResolver();
-
-        if (preference == mMaximizeWidgets) {
+        if (preference == mBatteryStatus) {
+            int value = Integer.valueOf((String) objValue);
+            int index = mBatteryStatus.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
+            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
+            return true;
+        else if (preference == mMaximizeWidgets) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, value ? 1 : 0);
             return true;
@@ -115,16 +122,4 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mBatteryStatus) {
-            int value = Integer.valueOf((String) objValue);
-            int index = mBatteryStatus.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
-            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
-            return true;
-        }
-        return false;
-    }
-}
+ }
