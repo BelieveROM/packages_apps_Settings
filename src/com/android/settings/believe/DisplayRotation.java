@@ -70,9 +70,6 @@ public class DisplayRotation extends SettingsPreferenceFragment implements OnPre
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
 
-        if (hasRotationLock) {
-                mAccelerometer.setEnabled(false);
-        }
         mRotation0Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_0_PREF);
         mRotation90Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_90_PREF);
         mRotation180Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_180_PREF);
@@ -86,6 +83,20 @@ public class DisplayRotation extends SettingsPreferenceFragment implements OnPre
         mRotation90Pref.setChecked((mode & ROTATION_90_MODE) != 0);
         mRotation180Pref.setChecked((mode & ROTATION_180_MODE) != 0);
         mRotation270Pref.setChecked((mode & ROTATION_270_MODE) != 0);
+
+
+      
+
+        if (hasRotationLock) {
+            // Disable accelerometer checkbox, but leave others enabled
+            mAccelerometer.setEnabled(false);
+            mSwapVolumeButtons.setDependency(null);
+            mRotation0Pref.setDependency(null);
+            mRotation90Pref.setDependency(null);
+            mRotation180Pref.setDependency(null);
+            mRotation270Pref.setDependency(null);
+        }
+
     }
 
     @Override
