@@ -5433,4 +5433,8 @@
     <string name="advanced_reboot_show_always">Show always</string>
 
 
+    <!-- Auto-Hide Status Bar -->
+    <string name="auto_hide_statusbar">Auto Hide statusbar</string>
+    <string name="auto_hide_statusbar_summary">Statusbar hides itself when there are no notifications</string>
+
 </resources>
