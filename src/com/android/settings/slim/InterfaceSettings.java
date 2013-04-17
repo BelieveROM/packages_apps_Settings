@@ -46,7 +46,10 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mTabletDrawer;
     private PreferenceScreen mHardwareKeys;
 
+
     private final Configuration mCurConfig = new Configuration();
+    private static final String KEY_PIE_SETTINGS = "pie_settings";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,14 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
                 }
             }
         } catch (RemoteException e) {
+        }
+
+        final boolean hasSlimPieByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_slimPie);
+
+        if (!hasSlimPieByDefault) {
+            // remove SlimPie entry if not supported
+            getPreferenceScreen().removePreference(findPreference(KEY_PIE_SETTINGS));
         }
     }
 
