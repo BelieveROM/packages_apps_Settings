@@ -5247,10 +5247,10 @@
     <string name="menu">Menu</string>
     <string name="open_ime_switcher">Open IME Switcher</string>
     <string name="kill_app">Kill app</string>
-    <string name="power">Power</string>
     <string name="widgets">Widgets viewpager</string>
     <string name="lastapp">Last app</string>
     <string name="power">Screen off</string>
+    <string name="quicksettings">Quicksettings panel</string>
     <string name="notifications">Notifications</string>
     <string name="custom_app">Custom app</string>
     <string name="menu_power">Power menu</string>
@@ -5314,6 +5314,7 @@
     <string name="navbar_action_widgets">Widgets viewpager</string>
     <string name="navbar_action_power">Screen Off</string>
     <string name="navbar_action_notifications">Notifications</string>
+    <string name="navbar_action_quicksettings">Quicksettings panel</string>
     <string name="navbar_action_none">None</string>
     <string name="navbar_enable_bar">Enable bar</string>
     <string name="navigation_bar_height_title">Navigation bar height</string>
@@ -5529,6 +5530,7 @@
     <string name="pie_action_widgets">Widgets viewpager</string>
     <string name="pie_action_power">Screen Off</string>
     <string name="pie_action_notifications">Notifications</string>
+    <string name="pie_action_quicksettings">Quicksettings panel</string>
     <string name="pie_action_none">None</string>
 
 

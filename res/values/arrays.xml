@@ -1869,6 +1869,7 @@
         <item>@string/open_ime_switcher</item>
         <item>@string/recents</item>
         <item>@string/power</item>
+        <item>@string/quicksettings</item>
         <item>@string/screenshot</item>
         <item>@string/search</item>
         <item>@string/widgets</item>
@@ -1885,6 +1886,7 @@
         <item>**ime**</item>
         <item>**recents**</item>
         <item>**power**</item>
+        <item>**quicksettings**</item>
         <item>**screenshot**</item>
         <item>**search**</item>
         <item>**widgets**</item>
@@ -2181,6 +2183,7 @@
         <item>@string/pie_action_ime</item>
         <item>@string/pie_action_recents</item>
         <item>@string/pie_action_power</item>
+        <item>@string/pie_action_quicksettings</item>
         <item>@string/pie_action_screenshot</item>
         <item>@string/pie_action_search</item>
         <item>@string/pie_action_widgets</item>
@@ -2198,6 +2201,7 @@
         <item>**ime**</item>
         <item>**recents**</item>
         <item>**power**</item>
+        <item>**quicksettings**</item>
         <item>**screenshot**</item>
         <item>**search**</item>
         <item>**widgets**</item>
