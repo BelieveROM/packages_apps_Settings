@@ -5534,4 +5534,8 @@
     <string name="pie_action_none">None</string>
 
 
+    <!-- Statusbar Quick Peek -->
+    <string name="statusbar_quick_peek_title">Quick Peek</string>
+    <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
+
 </resources>
