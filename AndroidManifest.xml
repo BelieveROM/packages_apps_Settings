@@ -1598,7 +1598,25 @@
                 android:value="com.android.settings.slim.PowerMenu" />
         </activity>
 
-  
+
+        <activity android:name="Settings$InterfaceSettingsActivity"
+                android:label="@string/interface_settings_title"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.slim.InterfaceSettings" />
+                <action android:name="android.settings.slim.InterfaceSettings" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.slim.InterfaceSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/interface_settings" />
+        </activity>
+
+       
         <activity android:name="Settings$ASSDisplayRotationActivity"
                 android:label="@string/display_rotation_title">
             <intent-filter>
