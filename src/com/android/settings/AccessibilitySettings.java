@@ -1035,6 +1035,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // Set a transparent drawable to prevent use of the default one.
             getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
             getListView().setDivider(null);
+            getListView().setCacheColorHint(0);
+            getListView().setSelector(android.R.color.transparent);
+
         }
 
         @Override
