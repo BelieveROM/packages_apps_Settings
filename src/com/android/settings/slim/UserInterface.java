@@ -38,14 +38,14 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
     public static final String TAG = "UserInterface";
 
-    private static final String MISC_SETTINGS = "misc";
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
     
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
 
    
     private CheckBoxPreference mUseAltResolver;
-    private PreferenceCategory mMisc;
+
+  
     private CheckBoxPreference mHighEndGfx;
 
    
@@ -57,8 +57,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
-
-        mMisc = (PreferenceCategory) prefs.findPreference(MISC_SETTINGS);
 
         mUseAltResolver = (CheckBoxPreference) findPreference(PREF_USE_ALT_RESOLVER);
         mUseAltResolver.setChecked(Settings.System.getInt(
@@ -78,7 +76,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                 Settings.System.putInt(getContentResolver(),Settings.System.HIGH_END_GFX_ENABLED, mHighEndGfx.isChecked() ? 1 : 0 );
             }
         } else {
-            mMisc.removePreference(mHighEndGfx);
+            prefs.removePreference(mHighEndGfx);
         }
     }
 
@@ -87,13 +85,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     @Override
     public void onResume() {
         super.onResume();
-        updateRamBar();
+        
     }
 
     @Override
     public void onPause() {
         super.onResume();
-        updateRamBar();
+       
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {

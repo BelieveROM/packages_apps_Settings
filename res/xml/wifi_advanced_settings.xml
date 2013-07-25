@@ -53,6 +53,7 @@
             android:entryValues="@array/wifi_frequency_band_values"
             />
 
+
     <Preference
             android:key="install_credentials"
             android:title="@string/wifi_install_credentials"

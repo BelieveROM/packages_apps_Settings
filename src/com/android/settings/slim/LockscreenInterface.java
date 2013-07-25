@@ -54,18 +54,17 @@ import net.margaritov.preference.colorpicker.ColorPickerView;
 public class LockscreenInterface extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
 
-
     private static final int LOCKSCREEN_BACKGROUND = 1024;
+
     private static final String KEY_ADDITIONAL_OPTIONS = "options_group";
     private static final String KEY_SLIDER_OPTIONS = "slider_group";
     private static final String KEY_WIDGET_OPTIONS = "lockscreen_widgets_group";
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
-    private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String PREF_LOCKSCREEN_EIGHT_TARGETS = "lockscreen_eight_targets";
     private static final String PREF_LOCKSCREEN_SHORTCUTS = "lockscreen_shortcuts";
-    private static final String PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS = "lockscreen_shortcuts_longpress";
+
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
 
@@ -77,9 +76,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private CheckBoxPreference mLockscreenAutoRotate;
     private CheckBoxPreference mLockscreenEightTargets;
     private Preference mShortcuts;
-    private CheckBoxPreference mLockscreenShortcutsLongpress;
 
-    private int mUnsecureUnlockMethod;
     private boolean mIsScreenLarge;
 
     private boolean mCheckPreferences;
@@ -105,11 +102,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         createCustomLockscreenView();
     }
 
-
-        mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
-        mBatteryStatus.setOnPreferenceChangeListener(this);
-        setBatteryStatusSummary();
-
     private PreferenceScreen createCustomLockscreenView() {
         mCheckPreferences = false;
         PreferenceScreen prefs = getPreferenceScreen();
@@ -119,7 +111,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
         prefs = getPreferenceScreen();
-        Preference mPref;
 
         mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);
 
@@ -144,36 +135,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         mBgAlpha.setProperty(Settings.System.LOCKSCREEN_ALPHA);
         mBgAlpha.setOnPreferenceChangeListener(this);
 
-
-        mAllWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_ALL_WIDGETS);
-        mAllWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.KG_ALL_WIDGETS, 1) == 1);
-
-        mCameraWidget = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
-        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.KG_CAMERA_WIDGET, 0) == 1);
-
-        mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
-        if (!Utils.isPhone(getActivity())) {
-            PreferenceCategory widgetCategory = (PreferenceCategory) findPreference(KEY_WIDGET_OPTIONS);
-            mPref = (Preference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
-            if (mPref != null)
-                widgetCategory.removePreference(mMaximizeWidgets);
-            mMaximizeWidgets = null;
-        } else {
-            mMaximizeWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
-        }
-
-        mLockscreenHints = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_DISABLE_HINTS);
-        mLockscreenHints.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_DISABLE_HINTS, 0) == 1);
-
-        mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
-        mLockscreenUseCarousel.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1);
-
-
         mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
         mBatteryStatus.setOnPreferenceChangeListener(this);
         setBatteryStatusSummary();
@@ -182,15 +143,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         int defaultValue = getResources().getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation) ? 1 : 0;
         mLockscreenAutoRotate.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_AUTO_ROTATE, defaultValue) == 1);
+        mLockscreenAutoRotate.setOnPreferenceChangeListener(this);
 
         mLockscreenEightTargets = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_EIGHT_TARGETS);
         mLockscreenEightTargets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_EIGHT_TARGETS, 0) == 1);
-
-        mLockscreenShortcutsLongpress = (CheckBoxPreference) findPreference(PREF_LOCKSCREEN_SHORTCUTS_LONGPRESS);
-        mLockscreenShortcutsLongpress.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_SHORTCUTS_LONGPRESS, 0) == 1);
-        mLockscreenShortcutsLongpress.setEnabled(!mLockscreenEightTargets.isChecked());
+        mLockscreenEightTargets.setOnPreferenceChangeListener(this);
 
         mShortcuts = (Preference) findPreference(PREF_LOCKSCREEN_SHORTCUTS);
         mShortcuts.setEnabled(!mLockscreenEightTargets.isChecked());
@@ -205,18 +163,20 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             mAdditionalOptions.removePreference(mLockscreenButtons);
         }
 
-        mUnsecureUnlockMethod = Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.LOCKSCREEN_UNSECURE_USED, 1);
+        final int unsecureUnlockMethod = Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.LOCKSCREEN_UNSECURE_USED, 1);
+        final int lockBeforeUnlock = Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.LOCK_BEFORE_UNLOCK, 0);
 
         PreferenceCategory sliderCategory = (PreferenceCategory) findPreference(KEY_SLIDER_OPTIONS);
 
         //setup custom lockscreen customize view
-        if (mUnsecureUnlockMethod != 1) {
+        if ((unsecureUnlockMethod != 1 && lockBeforeUnlock == 0)
+                 || unsecureUnlockMethod == -1) {
              getPreferenceScreen().removePreference(sliderCategory);
         } else if (!Utils.isPhone(getActivity())) {
              // Nothing for tablets and large screen devices
              sliderCategory.removePreference(mShortcuts);
-             sliderCategory.removePreference(mLockscreenShortcutsLongpress);
              sliderCategory.removePreference(mLockscreenEightTargets);
         }
 
@@ -224,7 +184,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         updateCustomBackgroundSummary();
         mCheckPreferences = true;
         return prefs;
-
     }
 
 
@@ -241,33 +200,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mLockscreenAutoRotate) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_AUTO_ROTATE, mLockscreenAutoRotate.isChecked() ? 1 : 0);
-            return true;
-        } else if (preference == mLockscreenEightTargets) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_EIGHT_TARGETS, mLockscreenEightTargets.isChecked() ? 1 : 0);
-            mShortcuts.setEnabled(!mLockscreenEightTargets.isChecked());
-            mLockscreenShortcutsLongpress.setEnabled(!mLockscreenEightTargets.isChecked());
-            Settings.System.putString(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_TARGETS, GlowPadView.EMPTY_TARGET);
-            for (File pic : mActivity.getFilesDir().listFiles()) {
-                if (pic.getName().startsWith("lockscreen_")) {
-                    pic.delete();
-                }
-            }
-            return true;
-        } else if (preference == mLockscreenShortcutsLongpress) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_SHORTCUTS_LONGPRESS, mLockscreenShortcutsLongpress.isChecked() ? 1 : 0);
-            return true;
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (!mCheckPreferences) {
             return false;
@@ -278,6 +210,22 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
             mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
+            return true;
+        } else if (preference == mLockscreenAutoRotate) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_AUTO_ROTATE, (Boolean) objValue ? 1 : 0);
+            return true;
+        } else if (preference == mLockscreenEightTargets) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_EIGHT_TARGETS, (Boolean) objValue ? 1 : 0);
+            mShortcuts.setEnabled(!((Boolean) objValue));
+            Settings.System.putString(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_TARGETS, GlowPadView.EMPTY_TARGET);
+            for (File pic : mActivity.getFilesDir().listFiles()) {
+                if (pic.getName().startsWith("lockscreen_")) {
+                    pic.delete();
+                }
+            }
             return true;
         } else if (preference == mCustomBackground) {
             int indexOf = mCustomBackground.findIndexOfValue(objValue.toString());

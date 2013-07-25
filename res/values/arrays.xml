@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-**
 ** Copyright 2007 The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
@@ -167,11 +166,7 @@
         <item>Slow</item>
         <item>Normal</item>
         <item>Fast</item>
-        <item>Faster</item>
         <item>Very fast</item>
-        <item>Rapid</item>
-        <item>Very rapid</item>
-        <item>Fastest</item>
     </string-array>
     <!-- Do not translate. -->
     <string-array name="tts_rate_values">
@@ -180,10 +175,6 @@
         <item>100</item>
         <item>150</item>
         <item>200</item>
-        <item>250</item>
-        <item>300</item>
-        <item>350</item>
-        <item>400</item>
     </string-array>
 
     <!-- Default pitch choices -->
@@ -194,6 +185,7 @@
         <item>High</item>
         <item>Very high</item>
     </string-array>
+
     <!-- Do not translate. -->
     <string-array name="tts_pitch_values">
         <item>50</item>
@@ -218,7 +210,6 @@
         <item>ita</item>
         <item>spa</item>
     </string-array>
-
 
     <!-- Wi-Fi settings -->
 
@@ -435,14 +426,7 @@
         <item>PWD</item>
     </string-array>
 
-    <!-- Phase 2 options for PEAP -->
-    <string-array name="wifi_peap_phase2_entries">
-        <item>None</item>
-        <item>MSCHAPV2</item>
-        <item>GTC</item>
-    </string-array>
-
-    <!-- Phase 2 options for rest of EAP methods -->
+    <!-- Phase 2 options -->
     <string-array name="wifi_phase2_entries">
         <item>None</item>
         <item>PAP</item>
@@ -474,6 +458,19 @@
         <item>Off</item>
         <item>Alert</item>
         <item>Vibrate</item>
+    </string-array>
+
+    <!-- NFC settings. -->
+    <string-array name="nfc_polling_mode_entries">
+       <item>@string/nfc_polling_mode_screen_off</item>
+       <item>@string/nfc_polling_mode_screen_locked</item>
+       <item>@string/nfc_polling_mode_screen_unlocked</item>
+    </string-array>
+
+    <string-array name="nfc_polling_mode_values">
+       <item>1</item>
+       <item>2</item>
+       <item>3</item>
     </string-array>
 
     <!-- Do not translate. -->
@@ -547,29 +544,6 @@
         <item>0</item>
     </string-array>
 
-    <!-- MVNO Info used in APN editor -->
-    <string-array name="mvno_type_entries">
-        <!-- Do not translate. -->
-        <item>None</item>
-        <!-- Do not translate. -->
-        <item>SPN</item>
-        <!-- Do not translate. -->
-        <item>IMSI</item>
-        <!-- Do not translate. -->
-        <item>GID</item>
-    </string-array>
-
-    <string-array translatable="false" name="mvno_type_values">
-        <!-- Do not translate. -->
-        <item></item>
-        <!-- Do not translate. -->
-        <item>spn</item>
-        <!-- Do not translate. -->
-        <item>imsi</item>
-        <!-- Do not translate. -->
-        <item>gid</item>
-    </string-array>
-
     <!-- Apps on SD instalaltion location options in ApplicationSettings -->
     <string-array name="app_install_location_entries">
         <item>Internal device storage</item>
@@ -582,84 +556,6 @@
         <item>device</item>
         <item>sdcard</item>
         <item>auto</item>
-    </string-array>
-
-    <!-- Names of categories of app ops tabs -->
-    <string-array name="app_ops_categories">
-        <item>Location</item>
-        <item>Personal</item>
-        <item>Messaging</item>
-        <item>Device</item>
-    </string-array>
-
-    <!-- User display names for app ops codes -->
-    <string-array name="app_ops_summaries">
-        <item>coarse location</item>
-        <item>fine location</item>
-        <item>GPS</item>
-        <item>vibrate</item>
-        <item>read contacts</item>
-        <item>modify contacts</item>
-        <item>read call log</item>
-        <item>modify call log</item>
-        <item>read calendar</item>
-        <item>modify calendar</item>
-        <item>wi-fi scan</item>
-        <item>notification</item>
-        <item>cell scan</item>
-        <item>call phone</item>
-        <item>read SMS</item>
-        <item>write SMS</item>
-        <item>receive SMS</item>
-        <item>receive emergency SMS</item>
-        <item>receive MMS</item>
-        <item>receive WAP push</item>
-        <item>send SMS</item>
-        <item>read ICC SMS</item>
-        <item>write ICC SMS</item>
-        <item>modify settings</item>
-        <item>draw on top</item>
-        <item>access notifications</item>
-        <item>camera</item>
-        <item>record audio</item>
-        <item>play audio</item>
-        <item>read clipboard</item>
-        <item>modify clipboard</item>
-    </string-array>
-
-    <!-- User display names for app ops codes -->
-    <string-array name="app_ops_labels">
-        <item>Location</item>
-        <item>Location</item>
-        <item>Location</item>
-        <item>Vibrate</item>
-        <item>Read contacts</item>
-        <item>Modify contacts</item>
-        <item>Read call log</item>
-        <item>Modify call log</item>
-        <item>Read calendar</item>
-        <item>Modify calendar</item>
-        <item>Location</item>
-        <item>Post notification</item>
-        <item>Location</item>
-        <item>Call phone</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
-        <item>Modify settings</item>
-        <item>Draw on top</item>
-        <item>Access notifications</item>
-        <item>Camera</item>
-        <item>Record audio</item>
-        <item>Play audio</item>
-        <item>Read clipboard</item>
-        <item>Modify clipboard</item>
     </string-array>
 
     <!-- Titles for the list of long press timeout options. -->
@@ -800,36 +696,6 @@
         <item>error</item>
     </string-array>
 
-    <!-- Titles for non-rectangular clipping preference. [CHAR LIMIT=35] -->
-    <string-array name="show_non_rect_clip_entries">
-        <item>Off</item>
-        <item>Draw non-rectangular clip region in blue</item>
-        <item>Highlight tested drawing commands in green</item>
-    </string-array>
-
-    <!-- Values for non-rectangular clipping preference. -->
-    <string-array name="show_non_rect_clip_values" translatable="false" >
-        <item>hide</item>
-        <item>region</item>
-        <item>highlight</item>
-    </string-array>
-
-    <!-- Titles for frame time tracking preference. [CHAR LIMIT=35] -->
-    <string-array name="track_frame_time_entries">
-        <item>Off</item>
-        <item>On screen as bars</item>
-        <item>On screen as lines</item>
-        <item>In adb shell dumpsys gfxinfo</item>
-    </string-array>
-
-    <!-- Values for frame time tracking preference. -->
-    <string-array name="track_frame_time_values" translatable="false" >
-        <item>false</item>
-        <item>visual_bars</item>
-        <item>visual_lines</item>
-        <item>true</item>
-    </string-array>
-
     <!-- Titles for app process limit preference. [CHAR LIMIT=35] -->
     <string-array name="app_process_limit_entries">
         <item>Standard limit</item>
@@ -917,155 +783,9 @@
         <item>Always allow</item>
     </string-array>
 
-     <!-- Believe Arrays -->
-
-    <!-- Volume Overlay options. -->
-    <string-array name="volume_overlay_entries">
-        <item>Single</item>
-        <item>Expandable</item>
-        <item>Expanded</item>
-        <item>None</item>
-    </string-array>
-
-    <!-- Values for Volume Overlay. Do not translate. -->
-    <string-array name="volume_overlay_values" translatable="false">
-
     <!-- Extra Slim Settings -->
 
-    <!-- Notification Shortcuts -->
-    <string-array name="notification_shortcuts_quantity_entries" translatable="false">
-        <item>4</item>
-        <item>6 (Default)</item>
-        <item>8</item>
-        <item>10</item>
-        <item>12</item>
-        <item>14</item>
-        <item>16</item>
-    </string-array>
-
-    <string-array name="notification_shortcuts_quantity_values" translatable="false">
-        <item>4</item>
-        <item>6</item>
-        <item>8</item>
-        <item>10</item>
-        <item>12</item>
-        <item>14</item>
-        <item>16</item>
-    </string-array>
-
-    <string-array name="notification_shortcuts_icon_picker_labels" translatable="false">
-        <item>@string/notification_shortcuts_icon_picker_alarm</item>
-        <item>@string/notification_shortcuts_icon_picker_andy</item>
-        <item>@string/notification_shortcuts_icon_picker_battery</item>
-        <item>@string/notification_shortcuts_icon_picker_browser</item>
-        <item>@string/notification_shortcuts_icon_picker_calendar</item>
-        <item>@string/notification_shortcuts_icon_picker_camera</item>
-        <item>@string/notification_shortcuts_icon_picker_cloud</item>
-        <item>@string/notification_shortcuts_icon_picker_contact</item>
-        <item>@string/notification_shortcuts_icon_picker_directdial</item>
-        <item>@string/notification_shortcuts_icon_picker_directmessage</item>
-        <item>@string/notification_shortcuts_icon_picker_drive</item>
-        <item>@string/notification_shortcuts_icon_picker_dropbox</item>
-        <item>@string/notification_shortcuts_icon_picker_email</item>
-        <item>@string/notification_shortcuts_icon_picker_email2</item>
-        <item>@string/notification_shortcuts_icon_picker_evernote</item>
-        <item>@string/notification_shortcuts_icon_picker_facebook</item>
-        <item>@string/notification_shortcuts_icon_picker_favorite</item>
-        <item>@string/notification_shortcuts_icon_picker_file_browser</item>
-        <item>@string/notification_shortcuts_icon_picker_file_browser2</item>
-        <item>@string/notification_shortcuts_icon_picker_fitness</item>
-        <item>@string/notification_shortcuts_icon_picker_gallery</item>
-        <item>@string/notification_shortcuts_icon_picker_gears</item>
-        <item>@string/notification_shortcuts_icon_picker_google_small</item>
-        <item>@string/notification_shortcuts_icon_picker_gplus</item>
-        <item>@string/notification_shortcuts_icon_picker_gtalk</item>
-        <item>@string/notification_shortcuts_icon_picker_help</item>
-        <item>@string/notification_shortcuts_icon_picker_joystick</item>
-        <item>@string/notification_shortcuts_icon_picker_key</item>
-        <item>@string/notification_shortcuts_icon_picker_laptop</item>
-        <item>@string/notification_shortcuts_icon_picker_luggage</item>
-        <item>@string/notification_shortcuts_icon_picker_maps</item>
-        <item>@string/notification_shortcuts_icon_picker_market</item>
-        <item>@string/notification_shortcuts_icon_picker_movie</item>
-        <item>@string/notification_shortcuts_icon_picker_music</item>
-        <item>@string/notification_shortcuts_icon_picker_nav</item>
-        <item>@string/notification_shortcuts_icon_picker_notes</item>
-        <item>@string/notification_shortcuts_icon_picker_package</item>
-        <item>@string/notification_shortcuts_icon_picker_phone</item>
-        <item>@string/notification_shortcuts_icon_picker_pinterest</item>
-        <item>@string/notification_shortcuts_icon_picker_play</item>
-        <item>@string/notification_shortcuts_icon_picker_pocket</item>
-        <item>@string/notification_shortcuts_icon_picker_podcast</item>
-        <item>@string/notification_shortcuts_icon_picker_quicksettings</item>
-        <item>@string/notification_shortcuts_icon_picker_rss</item>
-        <item>@string/notification_shortcuts_icon_picker_sdcard</item>
-        <item>@string/notification_shortcuts_icon_picker_search</item>
-        <item>@string/notification_shortcuts_icon_picker_sms</item>
-        <item>@string/notification_shortcuts_icon_picker_tasks</item>
-        <item>@string/notification_shortcuts_icon_picker_terminal</item>
-        <item>@string/notification_shortcuts_icon_picker_transit</item>
-        <item>@string/notification_shortcuts_icon_picker_tv</item>
-        <item>@string/notification_shortcuts_icon_picker_twitter</item>
-        <item>@string/notification_shortcuts_icon_picker_unlock</item>
-    </string-array>
-
-    <string-array name="notification_shortcuts_icon_picker_icons" translatable="false">
-        <item>@*android:drawable/ic_shortcut_alarm</item>
-        <item>@*android:drawable/ic_shortcut_andy</item>
-        <item>@*android:drawable/ic_shortcut_battery</item>
-        <item>@*android:drawable/ic_shortcut_browser</item>
-        <item>@*android:drawable/ic_shortcut_calendar</item>
-        <item>@*android:drawable/ic_shortcut_camera</item>
-        <item>@*android:drawable/ic_shortcut_cloud</item>
-        <item>@*android:drawable/ic_shortcut_contact</item>
-        <item>@*android:drawable/ic_shortcut_directdial</item>
-        <item>@*android:drawable/ic_shortcut_directmessage</item>
-        <item>@*android:drawable/ic_shortcut_drive</item>
-        <item>@*android:drawable/ic_shortcut_dropbox</item>
-        <item>@*android:drawable/ic_shortcut_email</item>
-        <item>@*android:drawable/ic_shortcut_email2</item>
-        <item>@*android:drawable/ic_shortcut_evernote</item>
-        <item>@*android:drawable/ic_shortcut_facebook</item>
-        <item>@*android:drawable/ic_shortcut_favorite</item>
-        <item>@*android:drawable/ic_shortcut_file_browser</item>
-        <item>@*android:drawable/ic_shortcut_file_browser2</item>
-        <item>@*android:drawable/ic_shortcut_fitness</item>
-        <item>@*android:drawable/ic_shortcut_gallery</item>
-        <item>@*android:drawable/ic_shortcut_gears</item>
-        <item>@*android:drawable/ic_shortcut_google_small</item>
-        <item>@*android:drawable/ic_shortcut_gplus</item>
-        <item>@*android:drawable/ic_shortcut_gtalk</item>
-        <item>@*android:drawable/ic_shortcut_help</item>
-        <item>@*android:drawable/ic_shortcut_joystick</item>
-        <item>@*android:drawable/ic_shortcut_key</item>
-        <item>@*android:drawable/ic_shortcut_laptop</item>
-        <item>@*android:drawable/ic_shortcut_luggage</item>
-        <item>@*android:drawable/ic_shortcut_maps</item>
-        <item>@*android:drawable/ic_shortcut_market</item>
-        <item>@*android:drawable/ic_shortcut_movie</item>
-        <item>@*android:drawable/ic_shortcut_music</item>
-        <item>@*android:drawable/ic_shortcut_nav</item>
-        <item>@*android:drawable/ic_shortcut_notes</item>
-        <item>@*android:drawable/ic_shortcut_package</item>
-        <item>@*android:drawable/ic_shortcut_phone</item>
-        <item>@*android:drawable/ic_shortcut_pinterest</item>
-        <item>@*android:drawable/ic_shortcut_play</item>
-        <item>@*android:drawable/ic_shortcut_pocket</item>
-        <item>@*android:drawable/ic_shortcut_podcast</item>
-        <item>@*android:drawable/ic_shortcut_quicksettings</item>
-        <item>@*android:drawable/ic_shortcut_rss</item>
-        <item>@*android:drawable/ic_shortcut_sdcard</item>
-        <item>@*android:drawable/ic_shortcut_search</item>
-        <item>@*android:drawable/ic_shortcut_sms</item>
-        <item>@*android:drawable/ic_shortcut_tasks</item>
-        <item>@*android:drawable/ic_shortcut_terminal</item>
-        <item>@*android:drawable/ic_shortcut_transit</item>
-        <item>@*android:drawable/ic_shortcut_tv</item>
-        <item>@*android:drawable/ic_shortcut_twitter</item>
-        <item>@*android:drawable/ic_shortcut_unlock</item>
-    </string-array>
-
-<!-- Arrays required by Notification Widgets. -->
+    <!-- Arrays required by Notification Widgets. -->
     <string-array name="entries_brightness_widget" formatted="false" translatable="false">
         <item>@string/cm_brightness_mode_auto</item>
         <item>@string/cm_brightness_mode_dim</item>
@@ -1076,145 +796,82 @@
     </string-array>
 
    <string-array name="values_brightness_widget" translatable="false">
-
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-
-    <string-array name="entries_status_bar_battery" translatable="false">
-        <item>@string/status_bar_style_icon</item>
-        <item>@string/status_bar_battery_status_percentage</item>
-        <item>@string/status_bar_battery_status_circle</item>
-        <item>@string/status_bar_battery_status_circle_percentage</item>
-        <item>@string/status_bar_style_hidden</item>
-
-   
-    <string-array name="values_status_bar_battery" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
 
+    <string-array name="entries_network_widget">
+        <item>2G | 2G+3G</item>
+        <item>2G | 3G</item>
+        <item>2G | 3G | 2G+3G</item>
+    </string-array>
 
-    <string-array name="entries_status_bar_signal" translatable="false">
-        <item>@string/status_bar_style_icon</item>
-        <item>@string/status_bar_signal_text_show_text</item>
-        <item>@string/status_bar_style_hidden</item>
-
-    <string-array name="values_status_bar_signal" translatable="false">
+    <string-array name="values_network_widget" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
     </string-array>
 
-    <string-array name="clock_style_entries">
-        <item>Right clock</item>
-        <item>Center clock</item>
-        <item>No clock</item>
+    <string-array name="entries_screentimeout_widget">
+        <item>15s | 1m | 5m</item>
+        <item>30s | 2m | 5m</item>
     </string-array>
 
-    <string-array name="clock_style_values" translatable="false">
-        <item>1</item>
-  <item>2</item>
+    <string-array name="values_screentimeout_widget" translatable="false">
         <item>0</item>
+        <item>1</item>
     </string-array>
 
-    <string-array name="entries_status_bar_am_pm">
+    <string-array name="entries_ring_widget" translatable="false">
+        <item>@string/cm_sound_mode_silent</item>
+        <item>@string/cm_sound_mode_vibrate</item>
+        <item>@string/cm_sound_mode_sound</item>
+        <item>@string/cm_sound_mode_soundVibrate</item>
+    </string-array>
+
+    <string-array name="values_ring_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="entries_flash_widget">
         <item>Normal</item>
-        <item>Small</item>
-        <item>None (default)</item>
-    </string-array>    
+        <item>High</item>
+    </string-array>
 
-    <string-array name="values_status_bar_am_pm" translatable="false">
+    <string-array name="values_flash_widget" translatable="false">
         <item>0</item>
         <item>1</item>
+    </string-array>
+
+    <string-array name="haptic_feedback_entries">
+        <item>Use global setting</item>
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+
+    <string-array name="haptic_feedback_values" translatable="false">
         <item>2</item>
-    </string-array>
-
-   <string-array name="lockscreen_icon_picker_labels" translatable="false">
-        <item>@string/icon_picker_alarm</item>
-        <item>@string/icon_picker_browser</item>
-        <item>@string/icon_picker_calendar</item>
-        <item>@string/icon_picker_camera</item>
-        <item>@string/icon_picker_chrome</item>
-        <item>@string/icon_picker_contacts</item> 
-        <item>@string/icon_picker_email</item>
-        <item>@string/icon_picker_email2</item>
-        <item>@string/icon_picker_facebook</item>
-        <item>@string/icon_picker_gallery</item>
-        <item>@string/icon_picker_google_small</item>
-        <item>@string/icon_picker_googleplus</item>
-        <item>@string/icon_picker_googletalk</item>
-        <item>@string/icon_picker_maps</item>
-        <item>@string/icon_picker_sms</item>
-        <item>@string/icon_picker_movie</item>
-        <item>@string/icon_picker_music</item>
-        <item>@string/icon_picker_nav_normal</item>
-        <item>@string/icon_picker_phone</item>
-        <item>@string/icon_picker_podcast</item>
-        <item>@string/icon_picker_rss</item>
-        <item>@string/icon_picker_search</item>
-        <item>@string/icon_picker_twitter</item>
-    </string-array>
-
-    <string-array name="lockscreen_icon_picker_icons" translatable="false">
-        <item>@*android:drawable/ic_lockscreen_alarm_normal</item>
-        <item>@*android:drawable/ic_lockscreen_browser_normal</item>
-        <item>@*android:drawable/ic_lockscreen_calendar_normal</item>
-        <item>@*android:drawable/ic_lockscreen_camera_normal</item>
-        <item>@*android:drawable/ic_lockscreen_chrome_normal</item>
-        <item>@*android:drawable/ic_lockscreen_contacts_normal</item>
-        <item>@*android:drawable/ic_lockscreen_email_normal</item>
-        <item>@*android:drawable/ic_lockscreen_email2_normal</item>
-        <item>@*android:drawable/ic_lockscreen_facebook_normal</item>
-        <item>@*android:drawable/ic_lockscreen_gallery_normal</item>
-        <item>@*android:drawable/ic_lockscreen_google_small_normal</item>
-        <item>@*android:drawable/ic_lockscreen_gplus_normal</item>
-        <item>@*android:drawable/ic_lockscreen_gtalk_normal</item>
-        <item>@*android:drawable/ic_lockscreen_maps_normal</item>
-        <item>@*android:drawable/ic_lockscreen_sms_normal</item>
-        <item>@*android:drawable/ic_lockscreen_movie_normal</item>
-        <item>@*android:drawable/ic_lockscreen_music_normal</item>
-        <item>@*android:drawable/ic_lockscreen_nav_normal</item>
-        <item>@*android:drawable/ic_lockscreen_phone_normal</item>
-        <item>@*android:drawable/ic_lockscreen_podcast_normal</item>
-        <item>@*android:drawable/ic_lockscreen_rss_normal</item>
-        <item>@*android:drawable/ic_lockscreen_google_normal</item>
-        <item>@*android:drawable/ic_lockscreen_twitter_normal</item>
-    </string-array>
-
-
-    <string-array name="lockscreen_delay_entries" translatable="false">
-        <item>@string/slide_lock_delay_none</item>
-        <item>@string/slide_lock_delay_1s</item>
-        <item>@string/slide_lock_delay_5s</item>
-        <item>@string/slide_lock_delay_10s</item>
-        <item>@string/slide_lock_delay_15s</item>
-        <item>@string/slide_lock_delay_30s</item>
-        <item>@string/slide_lock_delay_1m</item>
-        <item>@string/slide_lock_delay_5m</item>
-        <item>@string/slide_lock_delay_10m</item>
-        <item>@string/slide_lock_delay_30m</item>
-    </string-array>
-
-    <string-array name="lockscreen_delay_values" translatable="false">
+        <item>1</item>
         <item>0</item>
-        <item>1000</item>
-        <item>5000</item>
-        <item>10000</item>
-        <item>15000</item>
-        <item>30000</item>
-        <item>60000</item>
-        <item>300000</item>
-        <item>600000</item>
-        <item>1800000</item>
     </string-array>
 
+    <!-- Power widget brightness slider -->
+    <string-array name="power_widget_brightness_location_entries">
+        <item>Show</item>
+        <item>Don\'t Show</item>
+    </string-array>
+
+    <string-array name="power_widget_brightness_location_values" translatable="false">
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
     <!-- Performance settings -->
     <string-array name="pref_zram_size_entries">
@@ -1243,116 +900,24 @@
         <item>2</item>
     </string-array>
 
-    <!-- Profile mode options. -->
-    <string-array name="profile_entries">
-        <item>On</item>
-        <item>Off</item>
-        <item>No override</item>
+      
+    <!-- Volume Overlay options. -->
+    <string-array name="volume_overlay_entries">
+        <item>Single</item>
+        <item>Expandable</item>
+        <item>Expanded</item>
+        <item>None</item>
     </string-array>
 
-   
-    <!-- Custom lock screen background-->
-    <string-array name="lockscreen_background_entries" translatable="false">
-        <item>@string/lockscreen_background_color_fill</item>
-        <item>@string/lockscreen_background_custom_image</item>
-        <item>@string/lockscreen_background_default_wallpaper</item>
-    </string-array>
-
-    <string-array name="lockscreen_background_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-     <string-array name="entries_network_widget">
-        <item>2G | 2G+3G</item>
-        <item>2G | 3G</item>
-        <item>2G | 3G | 2G+3G</item>
-
-    </string-array>
-
-
-       
-    <string-array name="values_network_widget" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-  
-    <string-array name="entries_screentimeout_widget">
-        <item>15s | 1m | 5m</item>
-        <item>30s | 2m | 5m</item>
-    </string-array>
-
-
-    <string-array name="values_screentimeout_widget" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-    <string-array name="entries_ring_widget" translatable="false">
-        <item>@string/cm_sound_mode_silent</item>
-        <item>@string/cm_sound_mode_vibrate</item>
-        <item>@string/cm_sound_mode_sound</item>
-        <item>@string/cm_sound_mode_soundVibrate</item>
-    </string-array>
-
-    <string-array name="values_ring_widget" translatable="false">
+    <!-- Values for Volume Overlay. Do not translate. -->
+    <string-array name="volume_overlay_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
     </string-array>
 
-
-    <string-array name="entries_flash_widget">
-        <item>Normal</item>
-        <item>High</item>
-    </string-array>
-
-    <string-array name="values_flash_widget" translatable="false">
-        <item>0</item>
-        <item>1</item>
-
-    <!-- Ring mode options. -->
-    <string-array name="ring_mode_entries" translatable="false">
-        <item>@string/ring_mode_normal</item>
-        <item>@string/ring_mode_vibrate</item>
-        <item>@string/ring_mode_mute</item>
-    </string-array>
-
-    <!-- Values for Ring mode. Do not translate. -->
-    <string-array name="ring_mode_values" translatable="false">
-        <item>normal</item>
-        <item>vibrate</item>
-        <item>mute</item>
-    </string-array>
-  
-    <string-array name="haptic_feedback_entries">
-        <item>Use global setting</item>
-        <item>On</item>
-        <item>Off</item>
-    </string-array>
-
-    <string-array name="haptic_feedback_values" translatable="false">
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-    </string-array>
-
-
-    <!-- Power widget brightness slider -->
-    <string-array name="power_widget_brightness_location_entries">
-        <item>Show</item>
-        <item>Don\'t Show</item>
-    </string-array>
     
-    <string-array name="power_widget_brightness_location_values" translatable="false">
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
     <string-array name="clock_style_entries" translatable="false">
         <item>@string/right_clock</item>
         <item>@string/center_clock</item>
@@ -1491,7 +1056,41 @@
         <item>2</item>
     </string-array>
 
-   
+ 
+    <!-- Values for the notification light pulse spinners -->
+    <string-array name="notification_pulse_length_entries">
+        <item>@string/pulse_length_always_on</item>
+        <item>@string/pulse_length_very_short</item>
+        <item>@string/pulse_length_short</item>
+        <item>@string/pulse_length_normal</item>
+        <item>@string/pulse_length_long</item>
+        <item>@string/pulse_length_very_long</item>
+    </string-array>
+
+    <string-array name="notification_pulse_length_values" translatable="false">
+        <item>0</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2500</item>
+        <item>5000</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_entries">
+        <item>@string/pulse_speed_very_fast</item>
+        <item>@string/pulse_speed_fast</item>
+        <item>@string/pulse_speed_normal</item>
+        <item>@string/pulse_speed_slow</item>
+        <item>@string/pulse_speed_very_slow</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_values" translatable="false">
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2500</item>
+        <item>5000</item>
+    </string-array>
 
     <string-array name="notification_wallpaper_entries">
         <item>@string/notification_background_color_fill</item>
@@ -1553,21 +1152,23 @@
         <item>4</item>
     </string-array>
 
-
-   <!--- Volume key cursor control -->
-    <string-array name="volume_key_cursor_control_entries">
-        <item>@string/volume_key_cursor_control_off</item>
-        <item>@string/volume_key_cursor_control_on</item>
-        <item>@string/volume_key_cursor_control_on_reverse</item>
+    <!-- Arrays for root access capability -->
+    <string-array name="root_access_entries">
+        <item>@string/root_access_none</item>
+        <item>@string/root_access_apps</item>
+        <item>@string/root_access_adb</item>
+        <item>@string/root_access_all</item>
     </string-array>
 
-    <string-array name="volume_key_cursor_control_values" translatable="false">
+    <string-array name="root_access_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
-   
+  
+ 
     <!-- Quick pulldown -->
     <string-array name="quick_pulldown_entries">
         <item>@string/quick_pulldown_off</item>
@@ -1708,126 +1309,6 @@
         <item>@*android:drawable/ic_lockscreen_twitter_normal</item>
     </string-array>
 
-
-    <!-- Icon type for lockscreen shorcut. -->
-    <string-array name="icon_types">
-        <item>@string/icon_default</item>
-        <item>@string/icon_presets</item>
-        <item>@string/icon_custom</item>
-    </string-array>
-
-    <string-array name="lockscreen_shortcut_icon_picker_labels" translatable="false">
-        <item>@string/lockscreen_shortcuts_icon_picker_alarm</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_andy</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_battery</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_browser</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_calendar</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_camera</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_cloud</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_contact</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_directdial</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_directmessage</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_drive</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_dropbox</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_email</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_email2</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_evernote</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_facebook</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_favorite</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_file_browser</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_file_browser2</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_fitness</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_gallery</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_gears</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_google_small</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_gplus</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_gtalk</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_help</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_joystick</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_key</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_laptop</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_luggage</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_maps</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_market</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_movie</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_music</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_nav</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_notes</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_package</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_phone</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_pinterest</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_play</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_pocket</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_podcast</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_quicksettings</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_rss</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_sdcard</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_search</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_sms</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_tasks</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_terminal</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_transit</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_tv</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_twitter</item>
-        <item>@string/lockscreen_shortcuts_icon_picker_unlock</item>
-    </string-array>
-
-    <string-array name="lockscreen_shortcut_icon_picker_icons" translatable="false">
-        <item>@*android:drawable/ic_shortcut_alarm</item>
-        <item>@*android:drawable/ic_shortcut_andy</item>
-        <item>@*android:drawable/ic_shortcut_battery</item>
-        <item>@*android:drawable/ic_shortcut_browser</item>
-        <item>@*android:drawable/ic_shortcut_calendar</item>
-        <item>@*android:drawable/ic_shortcut_camera</item>
-        <item>@*android:drawable/ic_shortcut_cloud</item>
-        <item>@*android:drawable/ic_shortcut_contact</item>
-        <item>@*android:drawable/ic_shortcut_drive</item>
-        <item>@*android:drawable/ic_shortcut_directdial</item>
-        <item>@*android:drawable/ic_shortcut_directmessage</item>
-        <item>@*android:drawable/ic_shortcut_dropbox</item>
-        <item>@*android:drawable/ic_shortcut_email</item>
-        <item>@*android:drawable/ic_shortcut_email2</item>
-        <item>@*android:drawable/ic_shortcut_evernote</item>
-        <item>@*android:drawable/ic_shortcut_facebook</item>
-        <item>@*android:drawable/ic_shortcut_favorite</item>
-        <item>@*android:drawable/ic_shortcut_file_browser</item>
-        <item>@*android:drawable/ic_shortcut_file_browser2</item>
-        <item>@*android:drawable/ic_shortcut_fitness</item>
-        <item>@*android:drawable/ic_shortcut_gallery</item>
-        <item>@*android:drawable/ic_shortcut_gears</item>
-        <item>@*android:drawable/ic_shortcut_google_small</item>
-        <item>@*android:drawable/ic_shortcut_gplus</item>
-        <item>@*android:drawable/ic_shortcut_gtalk</item>
-        <item>@*android:drawable/ic_shortcut_help</item>
-        <item>@*android:drawable/ic_shortcut_joystick</item>
-        <item>@*android:drawable/ic_shortcut_key</item>
-        <item>@*android:drawable/ic_shortcut_laptop</item>
-        <item>@*android:drawable/ic_shortcut_luggage</item>
-        <item>@*android:drawable/ic_shortcut_maps</item>
-        <item>@*android:drawable/ic_shortcut_market</item>
-        <item>@*android:drawable/ic_shortcut_movie</item>
-        <item>@*android:drawable/ic_shortcut_music</item>
-        <item>@*android:drawable/ic_shortcut_nav</item>
-        <item>@*android:drawable/ic_shortcut_notes</item>
-        <item>@*android:drawable/ic_shortcut_package</item>
-        <item>@*android:drawable/ic_shortcut_phone</item>
-        <item>@*android:drawable/ic_shortcut_pinterest</item>
-        <item>@*android:drawable/ic_shortcut_play</item>
-        <item>@*android:drawable/ic_shortcut_pocket</item>
-        <item>@*android:drawable/ic_shortcut_podcast</item>
-        <item>@*android:drawable/ic_shortcut_quicksettings</item>
-        <item>@*android:drawable/ic_shortcut_rss</item>
-        <item>@*android:drawable/ic_shortcut_sdcard</item>
-        <item>@*android:drawable/ic_shortcut_search</item>
-        <item>@*android:drawable/ic_shortcut_sms</item>
-        <item>@*android:drawable/ic_shortcut_tasks</item>
-        <item>@*android:drawable/ic_shortcut_terminal</item>
-        <item>@*android:drawable/ic_shortcut_transit</item>
-        <item>@*android:drawable/ic_shortcut_tv</item>
-        <item>@*android:drawable/ic_shortcut_twitter</item>
-        <item>@*android:drawable/ic_shortcut_unlock</item>
-    </string-array>
-
     <string-array name="lockscreen_battery_status_entries">
         <item>@string/lockscreen_battery_status_charging</item>
         <item>@string/lockscreen_battery_status_alwayson</item>
@@ -1838,7 +1319,7 @@
         <item>1</item>
     </string-array>
 
-
+           
     <!-- NavBar -->
     <string-array name="pref_navigation_menu_entries">
         <item>@string/right</item>
@@ -1867,108 +1348,6 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
-
-    <string-array name="navigation_bar_qty_entries" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
-    <string-array name="navigation_bar_qty_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
-    <string-array name="navbar_button_entries">
-        <item>@string/back</item>
-        <item>@string/custom_app</item>
-        <item>@string/home</item>
-        <item>@string/kill_app</item>
-        <item>@string/menu</item>
-        <item>@string/notifications</item>
-        <item>@string/open_ime_switcher</item>
-        <item>@string/recents</item>
-        <item>@string/power</item>
-        <item>@string/quicksettings</item>
-        <item>@string/screenshot</item>
-        <item>@string/search</item>
-        <item>@string/widgets</item>
-        <item>@string/blank</item>
-    </string-array>
-
-    <string-array name="navbar_button_values" translatable="false">
-        <item>**back**</item>
-        <item>**app**</item>
-        <item>**home**</item>
-        <item>**kill**</item>
-        <item>**menu**</item>
-        <item>**notifications**</item>
-        <item>**ime**</item>
-        <item>**recents**</item>
-        <item>**power**</item>
-        <item>**quicksettings**</item>
-        <item>**screenshot**</item>
-        <item>**search**</item>
-        <item>**widgets**</item>
-        <item>**null**</item>
-    </string-array>
-
-    <string-array name="navring_dialog_entries">
-        <item>@string/custom_app</item>
-        <item>@string/kill_app</item>
-        <item>@string/lastapp</item>
-        <item>@string/notifications</item>
-        <item>@string/open_ime_switcher</item>
-        <item>@string/quicksettings</item>
-        <item>@string/ring_silent</item>
-        <item>@string/ring_vib</item>
-        <item>@string/ring_vib_silent</item>
-        <item>@string/kill_app</item>
-        <item>@string/screen_off</item>
-        <item>@string/take_screenshot</item>
-        <item>@string/google_now</item>
-        <item>@string/widgets</item>
-        <item>@string/none</item>
-    </string-array>
-
-    <string-array name="navring_dialog_values" translatable="false">
-        <item>**app**</item>
-        <item>**kill**</item>
-        <item>**lastapp**</item>
-        <item>**notifications**</item>
-        <item>**ime**</item>
-        <item>**quicksettings**</item>
-        <item>**ring_silent**</item>
-        <item>**ring_vib**</item>
-        <item>**ring_vib_silent**</item>
-        <item>**kill**</item>
-        <item>**power**</item>
-        <item>**screenshot**</item>
-        <item>**assist**</item>
-        <item>**widgets**</item>
-        <item>**null**</item>
-    </string-array>
-
-    <string-array name="pref_navring_amount_entries">
-        <item>@string/one_target</item>
-        <item>@string/two_targets</item>
-        <item>@string/three_targets</item>
-        <item>@string/four_targets</item>
-        <item>@string/five_targets</item>
-    </string-array>
-
-    <string-array name="pref_navring_amount_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
     </string-array>
 
     <string-array name="navigation_bar_width_entries" translatable="false">
@@ -2033,18 +1412,6 @@
         <item>0</item>
     </string-array>
 
-    <string-array name="nav_button_color_mode_entries">
-        <item>@string/nav_button_color_mode_all_icons</item>
-        <item>@string/nav_button_color_mode_system_icons</item>
-        <item>@string/nav_button_color_mode_system_custom_icons</item>
-    </string-array>
-
-    <string-array name="nav_button_color_mode_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
     <string-array name="glow_times_entries">
         <item>@string/glow_times_superquick</item>
         <item>@string/glow_times_quick</item>
@@ -2056,7 +1423,6 @@
         <item>250|25</item>
         <item>500|50</item>
     </string-array>
-
 
     <!-- Brightness slider -->
     <string-array name="brightness_location_entries">
@@ -2070,7 +1436,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-
 
     <!-- Status Bar alpha mode-->
     <string-array name="entries_status_bar_alpha_mode">
@@ -2113,7 +1478,21 @@
         <item>3</item>
     </string-array>
 
+   
+    <!-- Profiles -->
+    <string-array name="power_menu_profiles_entries">
+        <item>@string/power_menu_profiles_disabled</item>
+        <item>@string/power_menu_profiles_lock</item>
+        <item>@string/power_menu_profiles_all</item>
+    </string-array>
 
+    <string-array name="power_menu_profiles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    
     <!-- Advanced reboot menu dev options -->
     <string-array name="advanced_reboot_entries">
         <item>@string/advanced_reboot_disabled</item>
@@ -2127,7 +1506,6 @@
         <item>2</item>
     </string-array>
 
-
     <!-- Notification behavior preferences -->
     <string-array name="notifs_beh_entries">
         <item>Normal</item>
@@ -2140,18 +1518,6 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
-
-    <string-array name="pie_icon_color_mode_entries">
-        <item>@string/pie_icon_color_mode_all_icons</item>
-        <item>@string/pie_icon_color_mode_system_icons</item>
-        <item>@string/pie_icon_color_mode_system_custom_icons</item>
-    </string-array>
-
-    <string-array name="pie_icon_color_mode_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="pie_control_entries">
@@ -2202,42 +1568,6 @@
         <item>7</item>
     </string-array>
 
-    <string-array name="pie_button_entries">
-        <item>@string/pie_action_back</item>
-        <item>@string/pie_action_custom_app</item>
-        <item>@string/pie_action_home</item>
-        <item>@string/pie_action_kill</item>
-        <item>@string/pie_action_lastapp</item>
-        <item>@string/pie_action_menu</item>
-        <item>@string/pie_action_notifications</item>
-        <item>@string/pie_action_ime</item>
-        <item>@string/pie_action_recents</item>
-        <item>@string/pie_action_power</item>
-        <item>@string/pie_action_quicksettings</item>
-        <item>@string/pie_action_screenshot</item>
-        <item>@string/pie_action_search</item>
-        <item>@string/pie_action_widgets</item>
-        <item>@string/pie_action_none</item>
-    </string-array>
-
-    <string-array name="pie_button_values" translatable="false">
-        <item>**back**</item>
-        <item>**app**</item>
-        <item>**home**</item>
-        <item>**kill**</item>
-        <item>**lastapp**</item>
-        <item>**menu**</item>
-        <item>**notifications**</item>
-        <item>**ime**</item>
-        <item>**recents**</item>
-        <item>**power**</item>
-        <item>**quicksettings**</item>
-        <item>**screenshot**</item>
-        <item>**search**</item>
-        <item>**widgets**</item>
-        <item>**null**</item>
-    </string-array>
-
     <string-array name="pie_trigger_gravity_left_right_entries">
         <item>@string/pie_trigger_gravity_left_right_bottom</item>
         <item>@string/pie_trigger_gravity_left_right_center</item>
@@ -2249,6 +1579,207 @@
         <item>80</item>
         <item>16</item>
         <item>48</item>
+    </string-array>
+     
+    <string-array name="shortcut_action_entries">
+        <item>@string/shortcut_action_back</item>
+        <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_home</item>
+        <item>@string/shortcut_action_kill</item>
+        <item>@string/shortcut_action_lastapp</item>
+        <item>@string/shortcut_action_menu</item>
+        <item>@string/shortcut_action_notifications</item>
+        <item>@string/shortcut_action_ime</item>
+        <item>@string/shortcut_action_qs</item>
+        <item>@string/shortcut_action_recent</item>
+        <item>@string/shortcut_action_power</item>
+        <item>@string/shortcut_action_screenshot</item>
+        <item>@string/shortcut_action_search</item>
+        <item>@string/shortcut_action_widget</item>
+        <item>@string/shortcut_action_none</item>
+    </string-array>
+
+    <string-array name="shortcut_action_values" translatable="false">
+        <item>**back**</item>
+        <item>**app**</item>
+        <item>**home**</item>
+        <item>**kill**</item>
+        <item>**lastapp**</item>
+        <item>**menu**</item>
+        <item>**notifications**</item>
+        <item>**ime**</item>
+        <item>**quicksettings**</item>
+        <item>**recents**</item>
+        <item>**power**</item>
+        <item>**screenshot**</item>
+        <item>**search**</item>
+        <item>**widgets**</item>
+        <item>**null**</item>
+    </string-array>
+
+    <string-array name="shortcut_action_navring_entries">
+        <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_kill</item>
+        <item>@string/shortcut_action_lastapp</item>
+        <item>@string/shortcut_action_notifications</item>
+        <item>@string/shortcut_action_ime</item>
+        <item>@string/shortcut_action_qs</item>
+        <item>@string/shortcut_action_ring_silent</item>
+        <item>@string/shortcut_action_ring_vib</item>
+        <item>@string/shortcut_action_ring_vib_silent</item>
+        <item>@string/shortcut_action_power</item>
+        <item>@string/shortcut_action_screenshot</item>
+        <item>@string/shortcut_action_search</item>
+        <item>@string/shortcut_action_widget</item>
+        <item>@string/shortcut_action_none</item>
+    </string-array>
+
+    <string-array name="shortcut_action_navring_values" translatable="false">
+        <item>**app**</item>
+        <item>**kill**</item>
+        <item>**lastapp**</item>
+        <item>**notifications**</item>
+        <item>**ime**</item>
+        <item>**quicksettings**</item>
+        <item>**ring_silent**</item>
+        <item>**ring_vib**</item>
+        <item>**ring_vib_silent**</item>
+        <item>**power**</item>
+        <item>**screenshot**</item>
+        <item>**assist**</item>
+        <item>**widgets**</item>
+        <item>**null**</item>
+    </string-array>
+
+    <!-- Icon type for lockscreen shorcut. -->
+    <string-array name="icon_types">
+        <item>@string/icon_default</item>
+        <item>@string/icon_presets</item>
+        <item>@string/icon_custom</item>
+    </string-array>
+
+    <string-array name="shortcut_icon_picker_labels" translatable="false">
+        <item>@string/shortcuts_icon_picker_alarm</item>
+        <item>@string/shortcuts_icon_picker_andy</item>
+        <item>@string/shortcuts_icon_picker_battery</item>
+        <item>@string/shortcuts_icon_picker_browser</item>
+        <item>@string/shortcuts_icon_picker_calendar</item>
+        <item>@string/shortcuts_icon_picker_camera</item>
+        <item>@string/shortcuts_icon_picker_cloud</item>
+        <item>@string/shortcuts_icon_picker_contact</item>
+        <item>@string/shortcuts_icon_picker_directdial</item>
+        <item>@string/shortcuts_icon_picker_directmessage</item>
+        <item>@string/shortcuts_icon_picker_drive</item>
+        <item>@string/shortcuts_icon_picker_dropbox</item>
+        <item>@string/shortcuts_icon_picker_email</item>
+        <item>@string/shortcuts_icon_picker_email2</item>
+        <item>@string/shortcuts_icon_picker_evernote</item>
+        <item>@string/shortcuts_icon_picker_facebook</item>
+        <item>@string/shortcuts_icon_picker_favorite</item>
+        <item>@string/shortcuts_icon_picker_file_browser</item>
+        <item>@string/shortcuts_icon_picker_file_browser2</item>
+        <item>@string/shortcuts_icon_picker_fitness</item>
+        <item>@string/shortcuts_icon_picker_gallery</item>
+        <item>@string/shortcuts_icon_picker_gears</item>
+        <item>@string/shortcuts_icon_picker_google_small</item>
+        <item>@string/shortcuts_icon_picker_gplus</item>
+        <item>@string/shortcuts_icon_picker_gtalk</item>
+        <item>@string/shortcuts_icon_picker_help</item>
+        <item>@string/shortcuts_icon_picker_joystick</item>
+        <item>@string/shortcuts_icon_picker_key</item>
+        <item>@string/shortcuts_icon_picker_laptop</item>
+        <item>@string/shortcuts_icon_picker_luggage</item>
+        <item>@string/shortcuts_icon_picker_maps</item>
+        <item>@string/shortcuts_icon_picker_market</item>
+        <item>@string/shortcuts_icon_picker_movie</item>
+        <item>@string/shortcuts_icon_picker_music</item>
+        <item>@string/shortcuts_icon_picker_nav</item>
+        <item>@string/shortcuts_icon_picker_notes</item>
+        <item>@string/shortcuts_icon_picker_package</item>
+        <item>@string/shortcuts_icon_picker_phone</item>
+        <item>@string/shortcuts_icon_picker_pinterest</item>
+        <item>@string/shortcuts_icon_picker_play</item>
+        <item>@string/shortcuts_icon_picker_pocket</item>
+        <item>@string/shortcuts_icon_picker_podcast</item>
+        <item>@string/shortcuts_icon_picker_quicksettings</item>
+        <item>@string/shortcuts_icon_picker_rss</item>
+        <item>@string/shortcuts_icon_picker_sdcard</item>
+        <item>@string/shortcuts_icon_picker_search</item>
+        <item>@string/shortcuts_icon_picker_sms</item>
+        <item>@string/shortcuts_icon_picker_tasks</item>
+        <item>@string/shortcuts_icon_picker_terminal</item>
+        <item>@string/shortcuts_icon_picker_transit</item>
+        <item>@string/shortcuts_icon_picker_tv</item>
+        <item>@string/shortcuts_icon_picker_twitter</item>
+        <item>@string/shortcuts_icon_picker_unlock</item>
+    </string-array>
+
+    <string-array name="shortcut_icon_picker_icons" translatable="false">
+        <item>@*android:drawable/ic_shortcut_alarm</item>
+        <item>@*android:drawable/ic_shortcut_andy</item>
+        <item>@*android:drawable/ic_shortcut_battery</item>
+        <item>@*android:drawable/ic_shortcut_browser</item>
+        <item>@*android:drawable/ic_shortcut_calendar</item>
+        <item>@*android:drawable/ic_shortcut_camera</item>
+        <item>@*android:drawable/ic_shortcut_cloud</item>
+        <item>@*android:drawable/ic_shortcut_contact</item>
+        <item>@*android:drawable/ic_shortcut_directdial</item>
+        <item>@*android:drawable/ic_shortcut_directmessage</item>
+        <item>@*android:drawable/ic_shortcut_drive</item>
+        <item>@*android:drawable/ic_shortcut_dropbox</item>
+        <item>@*android:drawable/ic_shortcut_email</item>
+        <item>@*android:drawable/ic_shortcut_email2</item>
+        <item>@*android:drawable/ic_shortcut_evernote</item>
+        <item>@*android:drawable/ic_shortcut_facebook</item>
+        <item>@*android:drawable/ic_shortcut_favorite</item>
+        <item>@*android:drawable/ic_shortcut_file_browser</item>
+        <item>@*android:drawable/ic_shortcut_file_browser2</item>
+        <item>@*android:drawable/ic_shortcut_fitness</item>
+        <item>@*android:drawable/ic_shortcut_gallery</item>
+        <item>@*android:drawable/ic_shortcut_gears</item>
+        <item>@*android:drawable/ic_shortcut_google_small</item>
+        <item>@*android:drawable/ic_shortcut_gplus</item>
+        <item>@*android:drawable/ic_shortcut_gtalk</item>
+        <item>@*android:drawable/ic_shortcut_help</item>
+        <item>@*android:drawable/ic_shortcut_joystick</item>
+        <item>@*android:drawable/ic_shortcut_key</item>
+        <item>@*android:drawable/ic_shortcut_laptop</item>
+        <item>@*android:drawable/ic_shortcut_luggage</item>
+        <item>@*android:drawable/ic_shortcut_maps</item>
+        <item>@*android:drawable/ic_shortcut_market</item>
+        <item>@*android:drawable/ic_shortcut_movie</item>
+        <item>@*android:drawable/ic_shortcut_music</item>
+        <item>@*android:drawable/ic_shortcut_nav</item>
+        <item>@*android:drawable/ic_shortcut_notes</item>
+        <item>@*android:drawable/ic_shortcut_package</item>
+        <item>@*android:drawable/ic_shortcut_phone</item>
+        <item>@*android:drawable/ic_shortcut_pinterest</item>
+        <item>@*android:drawable/ic_shortcut_play</item>
+        <item>@*android:drawable/ic_shortcut_pocket</item>
+        <item>@*android:drawable/ic_shortcut_podcast</item>
+        <item>@*android:drawable/ic_shortcut_quicksettings</item>
+        <item>@*android:drawable/ic_shortcut_rss</item>
+        <item>@*android:drawable/ic_shortcut_sdcard</item>
+        <item>@*android:drawable/ic_shortcut_search</item>
+        <item>@*android:drawable/ic_shortcut_sms</item>
+        <item>@*android:drawable/ic_shortcut_tasks</item>
+        <item>@*android:drawable/ic_shortcut_terminal</item>
+        <item>@*android:drawable/ic_shortcut_transit</item>
+        <item>@*android:drawable/ic_shortcut_tv</item>
+        <item>@*android:drawable/ic_shortcut_twitter</item>
+        <item>@*android:drawable/ic_shortcut_unlock</item>
+    </string-array>
+
+    <string-array name="icon_color_mode_entries">
+        <item>@string/icon_color_mode_all_icons</item>
+        <item>@string/icon_color_mode_system_icons</item>
+        <item>@string/icon_color_mode_system_custom_icons</item>
+    </string-array>
+
+    <string-array name="icon_color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>
