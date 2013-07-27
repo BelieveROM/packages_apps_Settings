@@ -143,6 +143,12 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
+
+    private static final String DEVELOPMENT_TOOLS = "development_tools";
+
+    private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
+
+
     private static final int RESULT_DEBUG_APP = 1000;
 
     private IWindowManager mWindowManager;
@@ -193,17 +199,16 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private CheckBoxPreference mShowAllANRs;
     private CheckBoxPreference mKillAppLongpressBack;
-<<<<<<< HEAD
     private CheckBoxPreference mExperimentalWebView;
-=======
 
     private ListPreference mRootAccess;
     private Object mSelectedRootValue;
     private PreferenceScreen mDevelopmentTools;
 
     private ListPreference mAdvancedReboot;
->>>>>>> 6ec611d... Advanced advanced reboot menu options (2/2)
 
+    private ListPreference mMSOB;
+   
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
@@ -252,13 +257,11 @@ public class DevelopmentSettings extends PreferenceFragment
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
-<<<<<<< HEAD
-=======
 
         mAdvancedReboot = (ListPreference) findPreference(ADVANCED_REBOOT_KEY);
         mAllPrefs.add(mAdvancedReboot);
         mAdvancedReboot.setOnPreferenceChangeListener(this);
->>>>>>> 6ec611d... Advanced advanced reboot menu options (2/2)
+
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -337,6 +340,7 @@ public class DevelopmentSettings extends PreferenceFragment
         return pref;
     }
 
+  
     private void disableForUser(Preference pref) {
         if (pref != null) {
             pref.setEnabled(false);
@@ -410,6 +414,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAllOptions();
     }
 
+ 
     @Override
     public void onResume() {
         super.onResume();
@@ -424,6 +429,7 @@ public class DevelopmentSettings extends PreferenceFragment
             return;
         }
 
+       
         if (mDpm.getMaximumTimeToLock(null) > 0) {
             // A DeviceAdmin has specified a maximum time until the device
             // will lock...  in this case we can't allow the user to turn
@@ -1230,6 +1236,7 @@ public class DevelopmentSettings extends PreferenceFragment
             writeDebugLayoutOptions();
         } else if (preference == mKillAppLongpressBack) {
             writeKillAppLongpressBackOptions();
+
         }
 
         return false;

@@ -122,6 +122,7 @@ public class Settings extends PreferenceActivity
             R.id.system_section,
             R.id.date_time_settings,
             R.id.about_settings,
+            R.id.advanced_options_settings,
             R.id.accessibility_settings
     };
 
@@ -419,7 +420,8 @@ public class Settings extends PreferenceActivity
             // Ids are integers, so downcasting
             int id = (int) header.id;
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
-                    id == R.id.advanced_settings || id == R.id.update_settings) {
+                id == R.id.update_settings) {
+
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
@@ -451,7 +453,12 @@ public class Settings extends PreferenceActivity
                         || Utils.isMonkeyRunning()) {
                     target.remove(i);
                 }
-            
+
+            } else if (id == R.id.development_settings) {
+                if (!showDev) {
+                    target.remove(i);
+                }
+
             } else if (id == R.id.account_add) {
                 if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
                     target.remove(i);
@@ -594,7 +601,11 @@ public class Settings extends PreferenceActivity
         static int getHeaderType(Header header) {
             if (header.fragment == null && header.intent == null && header.id != R.id.trds_settings) {
                 return HEADER_TYPE_CATEGORY;
-            } else if (header.id == R.id.wifi_settings || header.id == R.id.trds_settings || header.id == R.id.bluetooth_settings) {
+
+            } else if (header.id == R.id.wifi_settings
+                     || header.id == R.id.bluetooth_settings
+                     || header.id == R.id.trds_settings) {
+
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
