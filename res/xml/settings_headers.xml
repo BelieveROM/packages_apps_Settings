@@ -58,6 +58,17 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
+    <!-- Believe -->
+    <header android:title="@string/believe_category_title" />
+
+    <!-- System -->
+    <header
+        android:id="@+id/system_settings"
+        android:fragment="com.android.settings.believe.SystemSettings"
+        android:title="@string/system_settings_title"
+        android:icon="@drawable/ic_settings_believe" />
+
+   
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
