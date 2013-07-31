@@ -4535,5 +4535,7 @@
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
 
+    <!-- 4.3 Permission Manager -->
+    <string name="app_ops">App Ops</string>
   
 </resources>

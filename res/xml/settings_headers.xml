@@ -193,6 +193,12 @@
         android:icon="@drawable/ic_settings_development"
         android:title="@string/development_settings_title" />
 
+    <!-- android permission manager -->
+    <header
+	android:fragment="com.android.settings.applications.AppOpsSummary"
+	android:icon="@drawable/ic_app_ops"
+	android:title="@string/app_ops" />
+
     <!-- About Device -->
     <header
         android:id="@+id/about_settings"
