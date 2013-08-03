@@ -199,5 +199,7 @@
     <string name="lockscreen_background_custom_image">Custom image</string>
     <string name="lockscreen_background_default_wallpaper">Default wallpaper</string>
 
-
+    <!-- Color Picker -->
+    <string name="dialog_indicator_color_title">Select color</string>
+    <string name="ok">OK</string>
 </resources>   
