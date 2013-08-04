@@ -84,4 +84,10 @@
     <string name="status_bar_am_pm_title">AM/PM style</string>
     <string name="status_bar_am_pm_info">24-hour clock is enabled</string> 
 
+   <!-- 4.3 Permission Manager -->
+    <string name="app_ops">App Ops</string>
+
+   <!-- Themes settings  -->
+    <string name="themes_settings_title">Themes</string>
+
 </resources>   
