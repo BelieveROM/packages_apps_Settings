@@ -90,4 +90,13 @@
    <!-- Themes settings  -->
     <string name="themes_settings_title">Themes</string>
 
+  <!-- About phone screen, modversion -->
+    <string name="mod_version">Believe Version</string>
+
+  <!-- TRDS Settings -->
+    <string name="trds_settings_title">Invertion</string> 
+
+   <!--- Launch music on app connect -->
+  <string name="headset_category_title">Headset</string>
+  <string name="headset_connect_player_title">Launch music app on connect</string>
 </resources>   

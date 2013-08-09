@@ -1172,7 +1172,7 @@
         </activity-alias>
 
         <activity android:name=".AppPicker" android:label="@string/select_application"
-                android:theme="@android:style/Theme.Holo.Dialog" />
+                android:theme="@*android:style/Theme.Holo.Dialog" />
 
         <activity android:name="Settings$UsbSettingsActivity"
                 android:label="@string/storage_title_usb"
@@ -1420,7 +1420,7 @@
         <!-- Standard picker for widgets -->
         <activity android:name="AppWidgetPickActivity"
                 android:label="@string/widget_picker_title"
-                android:theme="@*android:style/Theme.Holo.Dialog.Alert"
+                android:theme="@*android:style/Theme.Holo.Dialog"
                 android:finishOnCloseSystemDialogs="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_PICK" />
@@ -1429,7 +1429,7 @@
         </activity>
 
         <activity android:name="AllowBindAppWidgetActivity"
-                android:theme="@*android:style/Theme.Holo.Dialog.Alert"
+                android:theme="@*android:style/Theme.Holo.Dialog"
                 android:finishOnCloseSystemDialogs="true"
                 android:excludeFromRecents="true">
             <intent-filter>
@@ -1680,6 +1680,8 @@
                 <action android:name="android.provider.Contacts.PROFILE_CHANGED" />
             </intent-filter>
         </receiver>
-
+        <service 
+            android:name=".service.ExternalCommandService"
+            android:exported="false"/>
     </application>
 </manifest>
