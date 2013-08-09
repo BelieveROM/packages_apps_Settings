@@ -92,7 +92,7 @@
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage=" com.believe.updater"
-            android:targetClass="com.believe.updater.MainFragmentsHost.java" />
+            android:targetClass="com.believe.updater.MainFragmentsHost" />
     </header>
 
    
