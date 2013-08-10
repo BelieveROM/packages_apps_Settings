@@ -89,7 +89,7 @@ public class ShortcutPickHelper {
                 shortcutNames.add(s);
             }
         }
-       // shortcutNames.add(mParent.getString(R.string.profile_applist_title));
+        shortcutNames.add(mParent.getString(R.string.profile_applist_title));
         shortcutNames.add(mParent.getString(R.string.picker_activities));
         bundle.putStringArrayList(Intent.EXTRA_SHORTCUT_NAME, shortcutNames);
 
