@@ -91,7 +91,7 @@
         android:icon="@drawable/ic_settings_update">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage=" com.believe.updater"
+            android:targetPackage="com.believe.updater"
             android:targetClass="com.believe.updater.MainFragmentsHost" />
     </header>
 
