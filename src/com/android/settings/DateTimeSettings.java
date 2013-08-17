@@ -217,6 +217,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             Settings.System.putString(getContentResolver(),
                     Settings.System.DATE_FORMAT, format);
             updateTimeAndDateDisplay(getActivity());
+            dateUpdated();
         } else if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
             Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
@@ -233,44 +234,38 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     @Override
     public Dialog onCreateDialog(int id) {
-        Dialog d;
-
+        final Calendar calendar = Calendar.getInstance();
         switch (id) {
-        case DIALOG_DATEPICKER: {
-            final Calendar calendar = Calendar.getInstance();
-            d = new DatePickerDialog(
-                getActivity(),
-                this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-            // The system clock can't represent dates outside this range.
-            DatePickerDialog datePicker = (DatePickerDialog)d;
-            Calendar t = Calendar.getInstance();
-            t.clear();
-            t.set(1970, Calendar.JANUARY, 1);
-            datePicker.getDatePicker().setMinDate(t.getTimeInMillis());
-            t.clear();
-            t.set(2037, Calendar.DECEMBER, 31);
-            datePicker.getDatePicker().setMaxDate(t.getTimeInMillis());
-            break;
-        }
-        case DIALOG_TIMEPICKER: {
-            final Calendar calendar = Calendar.getInstance();
-            d = new TimePickerDialog(
+        case DIALOG_DATEPICKER:
+            DatePickerDialog d = new DatePickerDialog(
+                    getActivity(),
+                    this,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH));
+            configureDatePicker(d.getDatePicker());
+            return d;
+        case DIALOG_TIMEPICKER:
+            return new TimePickerDialog(
                     getActivity(),
                     this,
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
                     DateFormat.is24HourFormat(getActivity()));
-            break;
-        }
         default:
-            d = null;
-            break;
+            throw new IllegalArgumentException();
         }
+    }
 
-        return d;
+    static void configureDatePicker(DatePicker datePicker) {
+        // The system clock can't represent dates outside this range.
+        Calendar t = Calendar.getInstance();
+        t.clear();
+        t.set(1970, Calendar.JANUARY, 1);
+        datePicker.setMinDate(t.getTimeInMillis());
+        t.clear();
+        t.set(2037, Calendar.DECEMBER, 31);
+        datePicker.setMaxDate(t.getTimeInMillis());
     }
 
     /*
@@ -323,6 +318,11 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     private void timeUpdated() {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
+        getActivity().sendBroadcast(timeChanged);
+    }
+
+    private void dateUpdated() {
+        Intent timeChanged = new Intent(Intent.ACTION_DATE_CHANGED);
         getActivity().sendBroadcast(timeChanged);
     }
 
