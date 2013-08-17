@@ -96,25 +96,29 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
         mCircleColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_CIRCLE_BATTERY_COLOR);
         mCircleColor.setOnPreferenceChangeListener(this);
         intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, -1);
-        if (intColor == -1) {
+                    Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, -2);
+        if (intColor == -2) {
             intColor = getResources().getColor(
                     com.android.internal.R.color.holo_blue_dark);
+            mCircleColor.setSummary(getResources().getString(R.string.color_default));
+        } else {
+            hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mCircleColor.setSummary(hexColor);
         }
-        hexColor = String.format("#%08x", (0xffffffff & intColor));
-        mCircleColor.setSummary(hexColor);
         mCircleColor.setNewPreviewColor(intColor);
 
         mBatteryTextColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_BATTERY_TEXT_COLOR);
         mBatteryTextColor.setOnPreferenceChangeListener(this);
         intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_BATTERY_TEXT_COLOR, -1);
-        if (intColor == -1) {
+                    Settings.System.STATUS_BAR_BATTERY_TEXT_COLOR, -2);
+        if (intColor == -2) {
             intColor = getResources().getColor(
                     com.android.internal.R.color.holo_blue_dark);
+            mBatteryTextColor.setSummary(getResources().getString(R.string.color_default));
+        } else {
+            hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mBatteryTextColor.setSummary(hexColor);
         }
-        hexColor = String.format("#%08x", (0xffffffff & intColor));
-        mBatteryTextColor.setSummary(hexColor);
         mBatteryTextColor.setNewPreviewColor(intColor);
 
         mBatteryTextChargingColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_BATTERY_TEXT_CHARGING_COLOR);
@@ -124,11 +128,14 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
         if (intColor == -2 && statusBarBattery > 2) {
             intColor = getResources().getColor(
                     com.android.internal.R.color.holo_blue_dark);
+            mBatteryTextChargingColor.setSummary(getResources().getString(R.string.color_default));
         } else if (intColor == -2) {
             intColor = Color.GREEN;
+            mBatteryTextChargingColor.setSummary(getResources().getString(R.string.color_default));
+        } else {
+            hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mBatteryTextChargingColor.setSummary(hexColor);
         }
-        hexColor = String.format("#%08x", (0xffffffff & intColor));
-        mBatteryTextChargingColor.setSummary(hexColor);
         mBatteryTextChargingColor.setNewPreviewColor(intColor);
 
         mCircleAnimSpeed = (ListPreference) findPreference(PREF_STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED);
@@ -285,13 +292,12 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
 
     private void circleColorReset() {
         Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, -1);
+                Settings.System.STATUS_BAR_CIRCLE_BATTERY_COLOR, -2);
         Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_BATTERY_TEXT_COLOR, -2);
         Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_BATTERY_TEXT_CHARGING_COLOR, -2);
         createCustomView();
-
     }
 
     private void updateBatteryBarOptions(int batteryBarStat) {
