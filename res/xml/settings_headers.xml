@@ -105,7 +105,7 @@
 
     <header
         android:id="@+id/update_settings"
-        android:title="Believe Updater-Communicator"
+        android:title="Believe Communicator"
         android:icon="@drawable/ic_settings_update">
         <intent
             android:action="android.intent.action.MAIN"

@@ -1705,8 +1705,7 @@
         </activity>
 
        
-        <!-- believe activities End -->
-
+        
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
