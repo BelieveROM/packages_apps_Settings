@@ -38,11 +38,14 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
     private static final String PREF_NOTIFICATION_OPTIONS = "options";
     private static final String PREF_NOTIFICATION_POWER_WIDGET = "power_widget";
     private static final String PREF_NOTIFICATION_QUICK_SETTINGS = "quick_settings_panel";
+    private static final String PREF_NOTIFICATION_SETTINGS_BTN = "notification_settings_btn";
     private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
 
     PreferenceCategory mAdditionalOptions;
     Preference mPowerWidget;
+    Preference mQuickSettings;
     CheckBoxPreference mShowWifiName;
+    CheckBoxPreference mSettingsBtn;
     ListPreference mNotificationsBehavior;
 
     @Override
@@ -58,7 +61,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
               updatePowerWidgetDescription();
         }
 
-
         mQuickSettings = findPreference(PREF_NOTIFICATION_QUICK_SETTINGS);
         if (mQuickSettings != null) {
               updateQuickSettingsDescription();
@@ -70,10 +72,13 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
         mNotificationsBehavior.setSummary(mNotificationsBehavior.getEntry());
         mNotificationsBehavior.setOnPreferenceChangeListener(this);
 
-
         mShowWifiName = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SHOW_WIFI_SSID);
         mShowWifiName.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.NOTIFICATION_SHOW_WIFI_SSID, 0) == 1);
+
+        mSettingsBtn = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SETTINGS_BTN);
+        mSettingsBtn.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_SETTINGS_BUTTON, 0) == 1);
 
         mAdditionalOptions = (PreferenceCategory) prefs.findPreference(PREF_NOTIFICATION_OPTIONS);
 
@@ -97,10 +102,20 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
          }
     }
 
+    private void updateQuickSettingsDescription() {
+        if (Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.QS_DISABLE_PANEL, 0) == 0) {
+            mQuickSettings.setSummary(getString(R.string.quick_settings_enabled));
+        } else {
+            mQuickSettings.setSummary(getString(R.string.quick_settings_disabled));
+         }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         updatePowerWidgetDescription();
+        updateQuickSettingsDescription();
     }
 
     @Override
@@ -110,6 +125,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NOTIFICATION_SHOW_WIFI_SSID,
                     mShowWifiName.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mSettingsBtn) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NOTIFICATION_SETTINGS_BUTTON,
+                    mSettingsBtn.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
