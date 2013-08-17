@@ -146,9 +146,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String DEVELOPMENT_TOOLS = "development_tools";
 
-    private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
-
-
+   
     private static final int RESULT_DEBUG_APP = 1000;
 
     private IWindowManager mWindowManager;
@@ -205,9 +203,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private Object mSelectedRootValue;
     private PreferenceScreen mDevelopmentTools;
 
-    private ListPreference mAdvancedReboot;
-
-    private ListPreference mMSOB;
    
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
@@ -258,10 +253,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
-        mAdvancedReboot = (ListPreference) findPreference(ADVANCED_REBOOT_KEY);
-        mAllPrefs.add(mAdvancedReboot);
-        mAdvancedReboot.setOnPreferenceChangeListener(this);
-
+     
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -504,30 +496,8 @@ public class DevelopmentSettings extends PreferenceFragment
         updateExperimentalWebViewOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
-<<<<<<< HEAD
-=======
         updateRootAccessOptions();
-        updateAdvancedRebootOptions();
-    }
-
-    private void resetAdvancedRebootOptions() {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT, 0);
-    }
-
-    private void writeAdvancedRebootOptions(Object newValue) {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT,
-                Integer.valueOf((String) newValue));
-        updateAdvancedRebootOptions();
-    }
-
-    private void updateAdvancedRebootOptions() {
-        int value = Settings.Secure.getInt(getActivity().getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT, 0);
-        mAdvancedReboot.setValue(String.valueOf(value));
-        mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
-    }
+        
 
     private void updateAdbOverNetwork() {
         int port = Settings.Secure.getInt(getActivity().getContentResolver(),
@@ -555,7 +525,7 @@ public class DevelopmentSettings extends PreferenceFragment
         } else {
             mAdbOverNetwork.setSummary(R.string.adb_over_network_summary);
         }
->>>>>>> 6ec611d... Advanced advanced reboot menu options (2/2)
+
     }
 
     private void resetDangerousOptions() {
@@ -1272,10 +1242,6 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
-            return true;
-
-        } else if (preference == mAdvancedReboot) {
-            writeAdvancedRebootOptions(newValue);
             return true;
 
         }
