@@ -54,6 +54,8 @@ public class QuickSettingsUtil {
     public static final String TILE_TORCH = "toggleFlashlight";
     public static final String TILE_SLEEP = "toggleSleepMode";
     public static final String TILE_LTE = "toggleLte";
+    public static final String TILE_WIMAX = "toggleWimax";
+    //public static final String TILE_PROFILE = "toggleProfile";
     public static final String TILE_REBOOT = "toggleReboot";
     public static final String TILE_NFC = "toggleNfc";
     public static final String TILE_FCHARGE = "toggleFCharge";
@@ -62,7 +64,6 @@ public class QuickSettingsUtil {
     public static final String TILE_EXPANDED_DESKTOP = "toggleExpandedDesktop";
     public static final String TILE_CUSTOMSHORTCUT = "toggleCustomShortcut";
     public static final String TILE_MUSIC = "toggleMusic";
-
 
     private static final String TILE_DELIMITER = "|";
     protected static ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
@@ -136,9 +137,12 @@ public class QuickSettingsUtil {
         TILES.put(TILE_SLEEP, new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_power,
                 "com.android.systemui:drawable/ic_qs_power", true));
-        TILES.put(TILE_PROFILE, new QuickSettingsUtil.TileInfo(
-                TILE_PROFILE, R.string.title_tile_profile,
-                "com.android.systemui:drawable/ic_qs_profiles", true));
+       // TILES.put(TILE_PROFILE, new QuickSettingsUtil.TileInfo(
+        //        TILE_PROFILE, R.string.title_tile_profile,
+        //        "com.android.systemui:drawable/ic_qs_profiles", true));
+        TILES.put(TILE_QUIETHOURS, new QuickSettingsUtil.TileInfo(
+                TILE_QUIETHOURS, R.string.title_tile_quiet_hours,
+                "com.android.systemui:drawable/ic_qs_quiet_hours_off", true));
         TILES.put(TILE_REBOOT, new QuickSettingsUtil.TileInfo(
                 TILE_REBOOT, R.string.title_tile_reboot,
                 "com.android.systemui:drawable/ic_qs_reboot", true));
@@ -169,7 +173,6 @@ public class QuickSettingsUtil {
         TILES.put(TILE_WIFIAP, new QuickSettingsUtil.TileInfo(
                 TILE_WIFIAP, R.string.title_tile_wifiap,
                 "com.android.systemui:drawable/ic_qs_wifi_ap_neutral", true));
-
 // These toggles are not available yet.  Comment out for now
 //        TILES.put(TILE_WIMAX, new QuickSettingsUtil.TileInfo(
 //                TILE_WIMAX, R.string.title_tile_wimax,

@@ -36,10 +36,10 @@ public class GeneralSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "GeneralSettings";
 
-    private static final String KEY_CHRONUS = "chronus";
-    private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
+  //  private static final String KEY_CHRONUS = "chronus";
+  //  private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
-    private ListPreference mLowBatteryWarning;
+ //   private ListPreference mLowBatteryWarning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public class GeneralSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.slim_general_settings);
 
-        mLowBatteryWarning = (ListPreference) findPreference(KEY_LOW_BATTERY_WARNING_POLICY);
-        mLowBatteryWarning.setOnPreferenceChangeListener(this);
-        int lowBatteryWarning = Settings.System.getInt(getActivity().getContentResolver(),
-                                    Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, 0);
-        mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
-        mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
+    //    mLowBatteryWarning = (ListPreference) findPreference(KEY_LOW_BATTERY_WARNING_POLICY);
+    //    mLowBatteryWarning.setOnPreferenceChangeListener(this);
+    //    int lowBatteryWarning = Settings.System.getInt(getActivity().getContentResolver(),
+    //                                Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, 0);
+    //    mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
+    //    mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
 
-        removePreferenceIfPackageNotInstalled(findPreference(KEY_CHRONUS));
+     //   removePreferenceIfPackageNotInstalled(findPreference(KEY_CHRONUS));
     }
 
     @Override
@@ -68,15 +68,15 @@ public class GeneralSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mLowBatteryWarning) {
-            int lowBatteryWarning = Integer.valueOf((String) newValue);
-            int index = mLowBatteryWarning.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY,
-                    lowBatteryWarning);
-            mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
-            return true;
-        }
+     //   if (preference == mLowBatteryWarning) {
+     //       int lowBatteryWarning = Integer.valueOf((String) newValue);
+     //       int index = mLowBatteryWarning.findIndexOfValue((String) newValue);
+      //      Settings.System.putInt(getActivity().getContentResolver(),
+      //              Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY,
+      //              lowBatteryWarning);
+      //      mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
+      //      return true;
+      //  }
 
         return false;
     }

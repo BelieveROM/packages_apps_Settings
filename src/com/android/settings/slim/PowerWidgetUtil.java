@@ -20,7 +20,6 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import android.content.Context;
-import android.net.wimax.WimaxHelper;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -55,7 +54,6 @@ public class PowerWidgetUtil {
     public static final String BUTTON_MEDIA_PREVIOUS = "toggleMediaPrevious";
     public static final String BUTTON_MEDIA_NEXT = "toggleMediaNext";
     public static final String BUTTON_LTE = "toggleLte";
-    public static final String BUTTON_WIMAX = "toggleWimax";
     public static final String BUTTON_REBOOT = "toggleReboot";
     public static final String BUTTON_FCHARGE = "toggleFCharge";
 
@@ -129,10 +127,10 @@ public class PowerWidgetUtil {
                     BUTTON_LTE, R.string.title_toggle_lte,
                     "com.android.systemui:drawable/stat_lte_on"));
         }
-        BUTTONS.put(BUTTON_WIMAX, new PowerWidgetUtil.ButtonInfo(
-                BUTTON_WIMAX, R.string.title_toggle_wimax,
-                "com.android.systemui:drawable/stat_wimax_on"));
-    }
+    //    BUTTONS.put(BUTTON_WIMAX, new PowerWidgetUtil.ButtonInfo(
+     //           BUTTON_WIMAX, R.string.title_toggle_wimax,
+     //           "com.android.systemui:drawable/stat_wimax_on"));
+   }
 
     private static final String BUTTON_DELIMITER = "|";
     private static final String BUTTONS_DEFAULT = BUTTON_WIFI
@@ -146,9 +144,9 @@ public class PowerWidgetUtil {
         if (buttons == null) {
             buttons = BUTTONS_DEFAULT;
             // Add the WiMAX button if it's supported
-            if (WimaxHelper.isWimaxSupported(context)) {
-                buttons += BUTTON_DELIMITER + BUTTON_WIMAX;
-            }
+           // if (WimaxHelper.isWimaxSupported(context)) {
+           //     buttons += BUTTON_DELIMITER + BUTTON_WIMAX;
+          //  }
         }
         return buttons;
     }

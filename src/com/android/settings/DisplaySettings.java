@@ -48,7 +48,7 @@ import android.view.IWindowManager;
 
 import com.android.settings.DreamSettings;
 import com.android.settings.R;
-import com.android.settings.believe.DisplayRotation;
+import com.android.settings.slim.DisplayRotation;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
@@ -68,7 +68,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_BUTTON_WAKE = "pref_wakeon_button";
-    private static final String KEY_VOLUME_WAKE = "pref_volume_wake"; private static final String 
+    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
       
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;

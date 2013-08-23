@@ -31,7 +31,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.wimax.WimaxHelper;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -255,10 +254,10 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                     .getCurrentButtons(getActivity().getApplicationContext()));
 
             // Don't show WiMAX option if not supported
-            boolean isWimaxEnabled = WimaxHelper.isWimaxSupported(getActivity());
-            if (!isWimaxEnabled) {
-                PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIMAX);
-            }
+           // boolean isWimaxEnabled = WimaxHelper.isWimaxSupported(getActivity());
+           // if (!isWimaxEnabled) {
+           //     PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIMAX);
+          //  }
 
             // Don't show mobile data options if not supported
             boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);

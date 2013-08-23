@@ -1,10 +1,10 @@
- <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+            http://www.apache.org/licenses/LICENSE-2.0
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <!-- Arrays required by Notification Widgets. -->
     <string-array name="entries_brightness_widget" formatted="false" translatable="false">
         <item>@string/cm_brightness_mode_auto</item>
@@ -286,41 +285,7 @@
     </string-array>
 
 
-    <!-- Values for the notification light pulse spinners -->
-    <string-array name="notification_pulse_length_entries">
-        <item>@string/pulse_length_always_on</item>
-        <item>@string/pulse_length_very_short</item>
-        <item>@string/pulse_length_short</item>
-        <item>@string/pulse_length_normal</item>
-        <item>@string/pulse_length_long</item>
-        <item>@string/pulse_length_very_long</item>
-    </string-array>
-
-    <string-array name="notification_pulse_length_values" translatable="false">
-        <item>0</item>
-        <item>250</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2500</item>
-        <item>5000</item>
-    </string-array>
-
-    <string-array name="notification_pulse_speed_entries">
-        <item>@string/pulse_speed_very_fast</item>
-        <item>@string/pulse_speed_fast</item>
-        <item>@string/pulse_speed_normal</item>
-        <item>@string/pulse_speed_slow</item>
-        <item>@string/pulse_speed_very_slow</item>
-    </string-array>
-
-    <string-array name="notification_pulse_speed_values" translatable="false">
-        <item>250</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2500</item>
-        <item>5000</item>
-    </string-array>
-
+   
     <string-array name="notification_wallpaper_entries">
         <item>@string/notification_background_color_fill</item>
         <item>@string/notification_background_custom_image</item>
@@ -707,21 +672,21 @@
         <item>3</item>
     </string-array>
 
-   
-    <!-- Profiles -->
-    <string-array name="power_menu_profiles_entries">
-        <item>@string/power_menu_profiles_disabled</item>
-        <item>@string/power_menu_profiles_lock</item>
-        <item>@string/power_menu_profiles_all</item>
+    <!--- Sms security limit -->
+    <string-array name="sms_security_check_limit_entries" translatable="false">
+        <item>@string/sms_security_check_limit_default</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
     </string-array>
 
-    <string-array name="power_menu_profiles_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+    <string-array name="sms_security_check_limit_values" translatable="false">
+        <item>30</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
     </string-array>
 
-    
     <!-- Advanced reboot menu dev options -->
     <string-array name="advanced_reboot_entries">
         <item>@string/advanced_reboot_disabled</item>
@@ -887,6 +852,7 @@
         <item>@string/icon_custom</item>
     </string-array>
 
+     
     <string-array name="shortcut_icon_picker_labels" translatable="false">
         <item>@string/shortcuts_icon_picker_alarm</item>
         <item>@string/shortcuts_icon_picker_andy</item>
@@ -1009,6 +975,5 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </string-array>
-
+   </string-array>
 </resources>

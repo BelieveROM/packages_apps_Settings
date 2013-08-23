@@ -43,15 +43,15 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
 
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
     private static final String PREF_HIGH_END_GFX = "high_end_gfx";
-    
+    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String CATEGORY_INTERFACE = "interface_settings_action_prefs";
 
-    
+    private Preference mCustomLabel;
     private CheckBoxPreference mUseAltResolver;
     private CheckBoxPreference mHighEndGfx;
 
     
-
+    private String mCustomLabelText = null;
    
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,12 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
         mUseAltResolver.setChecked(Settings.System.getInt(
                 getActivity().getContentResolver(),
                 Settings.System.ACTIVITY_RESOLVER_USE_ALT, 0) == 1);
+
+
+       mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+       mCustomLabel.setOnPreferenceClickListener(mCustomLabelClicked);
+
+       updateCustomLabelTextSummary();
 
       
         mHighEndGfx = (CheckBoxPreference) findPreference(PREF_HIGH_END_GFX);
@@ -85,7 +91,16 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
 
     }
 
-   
+      private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -106,9 +121,43 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HIGH_END_GFX_ENABLED,
                     (Boolean) newValue ? 1 : 0);
-            return true;
+             return true;
         }
         return false;
     }
 
-    }
+    public OnPreferenceClickListener mCustomLabelClicked = new OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_explain);
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+            alert.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = ((Spannable) input.getText()).toString();
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_LABEL, value);
+                    updateCustomLabelTextSummary();
+                    Intent i = new Intent();
+                    i.setAction("com.android.settings.LABEL_CHANGED");
+                    mContext.sendBroadcast(i);
+                }
+            });
+            alert.setNegativeButton(getResources().getString(R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();
+            return true;
+        }
+    };
+}

@@ -19,7 +19,7 @@
     android:title="@string/general_settings_options_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen
+ <!--   <PreferenceScreen
         android:key="chronus"
         android:title="@string/chronus_title" >
         <intent android:action="android.intent.action.MAIN"
@@ -27,19 +27,20 @@
             android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
     </PreferenceScreen>
 
-    <!-- Profiles -->
-    <PreferenceScreen
-        android:fragment="com.android.settings.profiles.ProfilesSettings"
-        android:title="@string/profiles_settings_title" />
-
+ -->
     <PreferenceScreen
         android:key="widgets"
         android:fragment="com.android.settings.slim.WidgetsSettings"
         android:title="@string/navbar_widgets_title" />
 
-    <PreferenceCategory
+ <!--   <PreferenceCategory
         android:key="general_settings_options_prefs"
         android:title="@string/general_settings_options_title">
+
+        <CheckBoxPreference
+            android:key="dual_pane"
+            android:title="@string/dual_pane"
+            android:summary="@string/dual_pane_summary" />
 
         <ListPreference
             android:key="pref_low_battery_warning_policy"
@@ -49,6 +50,6 @@
             android:entryValues="@array/pref_low_battery_warning_policy_values"
             android:defaultValue="0" />
 
-    </PreferenceCategory>
+    </PreferenceCategory>  -->
 
 </PreferenceScreen>

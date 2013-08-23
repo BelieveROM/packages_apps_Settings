@@ -26,7 +26,11 @@
     <!-- Believe Category  -->
     <string name="believe_category_title">Believe</string>
 
+    <!-- display settings -->
+    <string name="display_title">Display</string>
+
     <!-- Sound settings screen -->
+     <string name="sound_title">Sound</string>
     <string name="advanced_sound_title">Advanced options</string>
     <string name="notifications_category_title">Notifications</string>
     <string name="volume_overlay_title">Volume panel style</string>
@@ -583,6 +587,7 @@
     <string name="lockscreen_shorcuts_longpress_title">Shortcuts longpress</string>
     <string name="lockscreen_shorcuts_longpress_summary">Open custom lock screen shortcuts on longpress</string>
 
+  
     <!-- Lock screen vibrate settings -->
     <string name="lockscreen_vibrate_enabled_title">Vibrate</string>
     <string name="lockscreen_vibrate_enabled_head">Vibrate when unlocking</string>
@@ -919,8 +924,60 @@
 
    <!-- Color Picker -->
     <string name="dialog_indicator_color_title">Select color</string>
+    <!-- INTERFACE Settings  -->
+    <!-- Settings main menu category heading. Rom (Launcher, Themes, System). [CHAR LIMIT=40] -->
+    <string name="header_category_rom_settings">ADVANCED SETTINGS</string>
     <string name="ok">OK</string>
+
     <string name="select_custom_app_title">Select custom app</string>
+
+     <!-- Sound settings screen -->
+    <string name="volume_overlay_title">Volume panel style</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+
+     <!-- Reset Profiles -->
+    <string name="profile_reset_title">Reset</string>
+    <string name="profile_reset_message">Delete all user created profiles and application groups and restore them to default?</string>
+     <string name="profile_applist_title">Applications</string>
+
+    <!-- Delete confimation messages -->
+    <string name="profile_delete_confirm">Delete this profile?</string>
+    <string name="profile_app_delete_confirm">Remove this application?</string>
+    <string name="profile_cannot_delete">An active profile cannot be deleted</string>
+    <string name="profiles_add">Add</string>
+    <string name="profile_menu_delete">Delete</string>
+
+     <!-- Notification light dialogs -->
+    <string name="edit_light_settings">Edit light settings</string>
+    <string name="pulse_speed_title">Pulse length and speed</string>
+    <string name="picker_arrow">→</string>
+    <string name="default_time">Normal</string>
+    <string name="custom_time">Custom</string>
+    <string name="dialog_test">Test</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Remove selected item?</string>
+    <string name="dialog_test_message">Turn the screen off to see the selected notification in action or dismiss this dialog to stop the test</string>
+    <string name="dialog_test_button">Dismiss</string>
+
+    <!--- Sms security limit -->
+    <string name="app_security_title">App security</string>
+    <string name="sms_security_check_limit_title">SMS message limit</string>
+    <string name="sms_security_check_limit_summary">Apps can send %d messages in 30 minutes before requiring confirmation</string>
+    <string name="sms_security_check_limit_default">30 (Default)</string>
+
+
+    <!-- Wakeup options -->
+    <string name="display_category_wakeup_options_title">Wakeup options</string>
+    <string name="pref_wakeon_button_title">Wakeon Button</string>
+    <string name="pref_wakeon_button_summary">Pressing the %1$s will wake your device</string>
+    <string name="wakeon_button_power">Power button</string>
+    <string name="wakeon_button_home">Home button</string>
+    <string name="wakeon_button_both">Power or Home buttons</string>
+    <string name="pref_volume_wake_title">Volume rocker wake</string>
+    <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the device</string>
+    <string name="wakeup_when_plugged_unplugged_title">Wake up on charge</string>
+    <string name="wakeup_when_plugged_unplugged_summary">Wake up device if charger is plugged/unplugged.</string>
+
 
 
 </resources>   

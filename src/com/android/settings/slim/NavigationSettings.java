@@ -28,7 +28,7 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class NavigationSettings extends SettingsPreferenceFragment {
 
-    private static final String KEY_HARDWARE_KEYS = "hardware_keys";
+ //   private static final String KEY_HARDWARE_KEYS = "hardware_keys";
     private static final String KEY_PIE_SETTINGS = "pie_settings";
 
     @Override
@@ -37,17 +37,17 @@ public class NavigationSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.slim_navigation_settings);
 
-        // Only show the hardware keys config on a device that does not have a navbar
-        IWindowManager windowManager = IWindowManager.Stub.asInterface(
-                ServiceManager.getService(Context.WINDOW_SERVICE));
+     //   // Only show the hardware keys config on a device that does not have a navbar
+     //   IWindowManager windowManager = IWindowManager.Stub.asInterface(
+      //          ServiceManager.getService(Context.WINDOW_SERVICE));
 
         final boolean hasNavBarByDefault = getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
 
-        if (hasNavBarByDefault) {
-            // Let's assume they don't have hardware keys
-            getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
-        }
+    //    if (hasNavBarByDefault) {
+    //        // Let's assume they don't have hardware keys
+    //        getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
+    //    }
 
         final boolean hasSlimPieByDefault = getResources().getBoolean(
                 com.android.internal.R.bool.config_slimPie);

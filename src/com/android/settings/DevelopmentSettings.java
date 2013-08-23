@@ -496,36 +496,36 @@ public class DevelopmentSettings extends PreferenceFragment
         updateExperimentalWebViewOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
-        updateRootAccessOptions();
-        
+      //  updateRootAccessOptions();
+     }    
 
     private void updateAdbOverNetwork() {
         int port = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_PORT, 0);
         boolean enabled = port > 0;
 
-        updateCheckBox(mAdbOverNetwork, enabled);
+    //    updateCheckBox(mAdbOverNetwork, enabled);
 
-        WifiInfo wifiInfo = null;
+    //    WifiInfo wifiInfo = null;
 
-        if (enabled) {
-            IWifiManager wifiManager = IWifiManager.Stub.asInterface(
-                    ServiceManager.getService(Context.WIFI_SERVICE));
-            try {
-                wifiInfo = wifiManager.getConnectionInfo();
-            } catch (RemoteException e) {
-                Log.e(TAG, "wifiManager, getConnectionInfo()", e);
-            }
-        }
+     //   if (enabled) {
+     //       IWifiManager wifiManager = IWifiManager.Stub.asInterface(
+     //               ServiceManager.getService(Context.WIFI_SERVICE));
+     //       try {
+      //          wifiInfo = wifiManager.getConnectionInfo();
+       //     } catch (RemoteException e) {
+      //          Log.e(TAG, "wifiManager, getConnectionInfo()", e);
+      //      }
+      //  }
 
-        if (wifiInfo != null) {
-            String hostAddress = NetworkUtils.intToInetAddress(
-                    wifiInfo.getIpAddress()).getHostAddress();
-            mAdbOverNetwork.setSummary(hostAddress + ":" + String.valueOf(port));
-        } else {
-            mAdbOverNetwork.setSummary(R.string.adb_over_network_summary);
-        }
-
+     //   if (wifiInfo != null) {
+      //      String hostAddress = NetworkUtils.intToInetAddress(
+      //              wifiInfo.getIpAddress()).getHostAddress();
+      //      mAdbOverNetwork.setSummary(hostAddress + ":" + String.valueOf(port));
+       // } else {
+       //     mAdbOverNetwork.setSummary(R.string.adb_over_network_summary);
+      //  }
+//
     }
 
     private void resetDangerousOptions() {
@@ -1302,15 +1302,15 @@ public class DevelopmentSettings extends PreferenceFragment
                     .apply();
             }
 
-        } else if (dialog == mRootDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                writeRootAccessOptions(mSelectedRootValue);
-
-            } else {
-                // Reset the toggle
-                mEnabledSwitch.setChecked(false);
-            }
-        }
+    //    } else if (dialog == mRootDialog) {
+     //       if (which == DialogInterface.BUTTON_POSITIVE) {
+      //          writeRootAccessOptions(mSelectedRootValue);
+//
+      //      } else {
+      //          // Reset the toggle
+      //          mEnabledSwitch.setChecked(false);
+      //      }
+      }
     }
 
     public void onDismiss(DialogInterface dialog) {

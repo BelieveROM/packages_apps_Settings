@@ -56,11 +56,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private static final int LOCKSCREEN_BACKGROUND = 1024;
 
-    private static final String KEY_ADDITIONAL_OPTIONS = "options_group";
+ //   private static final String KEY_ADDITIONAL_OPTIONS = "options_group";
     private static final String KEY_SLIDER_OPTIONS = "slider_group";
     private static final String KEY_WIDGET_OPTIONS = "lockscreen_widgets_group";
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
-    private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
+   // private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
     private static final String PREF_LOCKSCREEN_EIGHT_TARGETS = "lockscreen_eight_targets";
     private static final String PREF_LOCKSCREEN_SHORTCUTS = "lockscreen_shortcuts";
@@ -69,8 +69,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
 
     private ListPreference mBatteryStatus;
-    private PreferenceScreen mLockscreenButtons;
-    private PreferenceCategory mAdditionalOptions;
+  //  private PreferenceScreen mLockscreenButtons;
+  //  private PreferenceCategory mAdditionalOptions;
     private ListPreference mCustomBackground;
     private SeekBarPreference mBgAlpha;
     private CheckBoxPreference mLockscreenAutoRotate;
@@ -86,9 +86,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private File wallpaperImage;
     private File wallpaperTemporary;
 
-    public boolean hasButtons() {
-        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-    }
+    private int mUnsecureUnlockMethod;
+
+//    public boolean hasButtons() {
+//        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+ //   }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,7 +114,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
         prefs = getPreferenceScreen();
 
-        mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);
+   //     mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);
 
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND_PREF);
         mCustomBackground.setOnPreferenceChangeListener(this);
@@ -158,10 +160,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             mLockscreenAutoRotate.setSummary(getResources().getString(R.string.lockscreen_no_rotate_summary));
         }
 
-        mLockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
-        if (!hasButtons()) {
-            mAdditionalOptions.removePreference(mLockscreenButtons);
-        }
+   //     mLockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
+   //     if (!hasButtons()) {
+   //         mAdditionalOptions.removePreference(mLockscreenButtons);
+   //     }
 
         final int unsecureUnlockMethod = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.LOCKSCREEN_UNSECURE_USED, 1);
@@ -170,7 +172,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         PreferenceCategory sliderCategory = (PreferenceCategory) findPreference(KEY_SLIDER_OPTIONS);
 
-        //setup custom lockscreen customize view
+         //setup custom lockscreen customize view
         if ((unsecureUnlockMethod != 1 && lockBeforeUnlock == 0)
                  || unsecureUnlockMethod == -1) {
              getPreferenceScreen().removePreference(sliderCategory);

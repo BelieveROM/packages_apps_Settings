@@ -205,9 +205,9 @@ public class QuickSettingsTiles extends Fragment {
         }
 
         // Dont show the profiles tile if profiles are disabled
-        if (Settings.System.getInt(resolver, Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 1) {
-            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_PROFILE);
-        }
+        //if (Settings.System.getInt(resolver, Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 1) {
+       //     QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_PROFILE);
+      //  }
 
         // Dont show the NFC tile if not supported
         if (NfcAdapter.getDefaultAdapter(mContext) == null) {
