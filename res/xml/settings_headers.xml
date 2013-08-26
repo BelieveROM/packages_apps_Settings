@@ -58,32 +58,33 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
-     <!-- Believe -->
-    <header android:title="@string/believe_category_title" />
+    <!-- Believe -->
+    <header android:title="@string/header_category_rom_settings" />
 
     <!-- General -->
     <header
         android:id="@+id/general_settings"
-        android:icon="@drawable/ic_settings_slim"
+        android:icon="@drawable/ic_settings_believe"
         android:fragment="com.android.settings.slim.GeneralSettings"
         android:title="@string/general_settings_title" />
 
-    <!-- Interface -->
+   
+    <!-- TRDS -->
     <header
-        android:id="@+id/interface_settings"
-        android:icon="@drawable/ic_settings_interface"
-        android:fragment="com.android.settings.slim.InterfaceSettings"
-        android:title="@string/interface_settings_title" />
+        android:id="@+id/trds_settings"
+        android:icon="@drawable/ic_settings_trds"
+        android:title="@string/trds_settings_title" />
 
-
-     <!-- Navigation -->
+    <!-- Believeupdater -->
     <header
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings_navigation"
-        android:fragment="com.android.settings.slim.NavigationSettings"
-        android:title="@string/navigation_settings_title" />
-
-
+        android:id="@+id/update_settings"
+        android:title="Believe Communicator"
+        android:icon="@drawable/ic_settings_update">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.believe.updater"
+            android:targetClass="com.believe.updater.MainFragmentsHost" />
+    </header>
 
    <!-- Advanced options -->
     <header
@@ -92,6 +93,7 @@
         android:icon="@drawable/ic_settings_advanced"
         android:title="@string/advanced_options_settings_title" />
 
+  
        <!-- Themes -->
     <header
         android:id="@+id/themes_settings"
@@ -101,24 +103,6 @@
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.tmobile.themechooser"
             android:targetClass="com.tmobile.themechooser.ThemeChooser" />
-    </header>
- 
-
-    <!-- TRDS -->
-    <header
-        android:id="@+id/trds_settings"
-        android:icon="@drawable/ic_bw"
-        android:title="@string/trds_settings_title" />
-
-   <!-- Believeupdater -->
-    <header
-        android:id="@+id/update_settings"
-        android:title="Believe Communicator"
-        android:icon="@drawable/ic_settings_update">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.believe.updater"
-            android:targetClass="com.believe.updater.MainFragmentsHost" />
     </header>
 
 
@@ -175,8 +159,6 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
-    
-
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
@@ -226,13 +208,6 @@
     <header android:id="@+id/system_section"
         android:title="@string/header_category_system" />
 
-   <!-- Superuser -->
-    <header
-        android:id="@+id/superuser"
-        android:fragment="com.android.settings.cyanogenmod.superuser.PolicyNativeFragment"
-        android:icon="@drawable/ic_action_permission"
-        android:title="@string/superuser" />
-
     <!-- Date & Time -->
     <header
         android:id="@+id/date_time_settings"
@@ -254,13 +229,12 @@
         android:icon="@drawable/ic_settings_development"
         android:title="@string/development_settings_title" />
 
-    <!-- android permission manager -->
+   <!-- android permission manager -->
     <header
 	android:fragment="com.android.settings.applications.AppOpsSummary"
 	android:icon="@drawable/ic_app_ops"
 	android:title="@string/app_ops" />
 
-   
     <!-- About Device -->
     <header
         android:id="@+id/about_settings"

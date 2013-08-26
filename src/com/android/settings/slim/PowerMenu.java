@@ -18,12 +18,15 @@ package com.android.settings.slim;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -42,7 +45,7 @@ public class PowerMenu extends SettingsPreferenceFragment implements
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
     private ListPreference mExpandedDesktopPref;
-    //private CheckBoxPreference mProfilesPref;
+    private ListPreference mProfilesPref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mSoundPref;
 
@@ -69,14 +72,29 @@ public class PowerMenu extends SettingsPreferenceFragment implements
         mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
         mExpandedDesktopPref.setSummary(mExpandedDesktopPref.getEntries()[expandedDesktopValue]);
 
-     //   mProfilesPref = (CheckBoxPreference) findPreference(KEY_PROFILES);
-     //   mProfilesPref.setChecked((Settings.System.getInt(getContentResolver(),
-     //           Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1));
+        // Hide no-op "Status bar visible" mode on devices without navbar
+        // WindowManager already respects the default config value and the
+        // show NavBar mod from us
+        try {
+            if (!WindowManagerGlobal.getWindowManagerService().hasNavigationBar()) {
+                mExpandedDesktopPref.setEntries(R.array.expanded_desktop_entries_no_navbar);
+                mExpandedDesktopPref.setEntryValues(R.array.expanded_desktop_values_no_navbar);
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error getting navigation bar status");
+        }
+
+        mProfilesPref = (ListPreference) findPreference(KEY_PROFILES);
+        mProfilesPref.setOnPreferenceChangeListener(this);
+        int mProfileShow = Settings.System.getInt(getContentResolver(),
+                Settings.System.POWER_MENU_PROFILES_ENABLED, 1);
+        mProfilesPref.setValue(String.valueOf(mProfileShow));
+        mProfilesPref.setSummary(mProfilesPref.getEntries()[mProfileShow]);
 
         // Only enable if System Profiles are also enabled
-     //   boolean enabled = Settings.System.getInt(getContentResolver(),
-     //           Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
-     //   mProfilesPref.setEnabled(enabled);
+        boolean enabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
+        mProfilesPref.setEnabled(enabled);
 
         mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
         mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -106,6 +124,13 @@ public class PowerMenu extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_DESKTOP_MODE, expandedDesktopValue);
             mExpandedDesktopPref.setSummary(mExpandedDesktopPref.getEntries()[index]);
             return true;
+        } else if (preference == mProfilesPref) {
+            int mProfileShow = Integer.valueOf((String) newValue);
+            int index = mProfilesPref.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_PROFILES_ENABLED, mProfileShow);
+            mProfilesPref.setSummary(mProfilesPref.getEntries()[index]);
+            return true;
         }
         return false;
     }
@@ -124,11 +149,6 @@ public class PowerMenu extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_REBOOT_ENABLED,
                     value ? 1 : 0);
-     //   } else if (preference == mProfilesPref) {
-      //      value = mProfilesPref.isChecked();
-      //      Settings.System.putInt(getContentResolver(),
-      //              Settings.System.POWER_MENU_PROFILES_ENABLED,
-      //              value ? 1 : 0);
        } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();
             Settings.System.putInt(getContentResolver(),

@@ -41,11 +41,13 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +100,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
     private static final String KEY_VIBRATE_PREF = "lockscreen_vibrate";
     private static final String KEY_SMS_SECURITY_CHECK_PREF = "sms_security_check_limit";
-    //private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
-    //private static final String KEY_BLACKLIST = "blacklist";
     private static final String PREF_ADVANCED_REBOOT_KEY = "advanced_reboot";
 
     private PackageManager mPM;
@@ -138,7 +138,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mQuickUnlockScreen;
     private CheckBoxPreference mLockBeforeUnlock;
     private ListPreference mSmsSecurityCheck;
-   // private PreferenceScreen mBlacklist;
     private ListPreference mAdvancedReboot;
 
     @Override
@@ -452,23 +451,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     }
                 }
 
-                boolean isTelephony = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
-                if (isTelephony) {
-                    addPreferencesFromResource(R.xml.security_settings_app_slim);
+                // App security settings
+                addPreferencesFromResource(R.xml.security_settings_app_slim);
+                mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
+                if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                     mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
                     mSmsSecurityCheck.setOnPreferenceChangeListener(this);
                     int smsSecurityCheck = Integer.valueOf(mSmsSecurityCheck.getValue());
                     updateSmsSecuritySummary(smsSecurityCheck);
                 }
-              
-           } else {
-                if (deviceAdminCategory != null) {
-                    deviceAdminCategory.removePreference(mToggleVerifyApps);
-                } else {
-                    mToggleVerifyApps.setEnabled(false);
-                }
-            }
-        
+           
+             }
 
             mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
             if (mNotificationAccess != null) {
@@ -712,8 +705,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
 
-        // Blacklist
-      //  updateBlacklistSummary();
+        
     }
 
     @Override
@@ -879,4 +871,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
         startActivity(intent);
     }
+
+   
 }

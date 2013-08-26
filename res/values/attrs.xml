@@ -82,22 +82,7 @@
         <attr name="fillColorSecondary" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="ListPreferenceMultiSelect">
-     <attr format="string" name="checkAll" />
-     <attr format="string" name="separator" />
-    </declare-styleable>
-
-    <declare-styleable name="DeveloperPreference">
-        <attr name="twitterHandle" format="string" />
-        <attr name="nameDev" format="string"/>
-        <attr name="donateLink" format="string" />
-    </declare-styleable>
-
-    <declare-styleable name="ImageListPreference">
-        <attr name="summaryImage" format="reference" />
-        <attr name="entryImages" format="reference" />
-    </declare-styleable>
-
+  
     <declare-styleable name="CubicSplinePreviewView">
         <attr name="backgroundColor" format="color" />
         <attr name="foregroundColor" format="color" />
@@ -136,6 +121,5 @@
         <attr name="clickRemoveId" format="integer" />
         <attr name="useDefaultController" format="boolean" />
     </declare-styleable>
-
 
 </resources>

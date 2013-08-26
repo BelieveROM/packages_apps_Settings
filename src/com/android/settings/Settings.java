@@ -26,9 +26,10 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.believe.TRDSEnabler;
+import com.android.settings.slim.TRDSEnabler;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wifi.WifiEnabler;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -415,7 +416,6 @@ public class Settings extends PreferenceActivity
                 WifiDisplaySettings.class.getName().equals(fragmentName) ||
                 BluetoothSettings.class.getName().equals(fragmentName) ||
                 DreamSettings.class.getName().equals(fragmentName) ||
-                
                 ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
@@ -434,7 +434,7 @@ public class Settings extends PreferenceActivity
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW,
-                android.os.Build.TYPE.equals("eng")) || android.os.Build.VERSION.CODENAME.equals("UNOFFICIAL");
+                android.os.Build.TYPE.equals("eng") || android.os.Build.TYPE.equals("userdebug"));
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -443,8 +443,7 @@ public class Settings extends PreferenceActivity
             Header header = target.get(i);
             // Ids are integers, so downcasting
             int id = (int) header.id;
-            if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
-                id == R.id.update_settings) {
+            if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
@@ -879,14 +878,18 @@ public class Settings extends PreferenceActivity
     public static class WifiDisplaySettingsActivity extends Settings { /* empty */ }
     public static class DreamSettingsActivity extends Settings { /* empty */ }
     public static class InterfaceSettingsActivity extends Settings { /* empty */ }
+    public static class ApnSettingsActivity extends Settings { /* empty */ }
+    public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class QuickSettingsActivity extends Settings { /* empty */ }
     public static class QuickSettingsTilesActivity extends Settings { /* empty */ }
     public static class ASSDisplayRotationActivity extends Settings { /* empty */ }
     public static class ASSLockscreenActivity extends Settings { /* empty */ }
+    public static class ASSRamBarActivity extends Settings { /* empty */ }
+    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class NotificationShortcutsSettingsActivity extends Settings { /* empty */ }
     public static class PowerMenuSettingsActivity extends Settings { /* empty */ }
     public static class NotificationStationActivity extends Settings { /* empty */ }
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
-   
+    
 }

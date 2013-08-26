@@ -44,15 +44,20 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
     private static final String PREF_HIGH_END_GFX = "high_end_gfx";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String PREF_RECENTS_RAM_BAR = "recents_ram_bar";
     private static final String CATEGORY_INTERFACE = "interface_settings_action_prefs";
 
     private Preference mCustomLabel;
+    private Preference mLcdDensity;
+    private Preference mRamBar;
     private CheckBoxPreference mUseAltResolver;
     private CheckBoxPreference mHighEndGfx;
 
-    
     private String mCustomLabelText = null;
-   
+    private int newDensityValue;
+
+    DensityChanger densityFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +73,21 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
                 getActivity().getContentResolver(),
                 Settings.System.ACTIVITY_RESOLVER_USE_ALT, 0) == 1);
 
+        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+        mCustomLabel.setOnPreferenceClickListener(mCustomLabelClicked);
 
-       mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
-       mCustomLabel.setOnPreferenceClickListener(mCustomLabelClicked);
+        updateCustomLabelTextSummary();
 
-       updateCustomLabelTextSummary();
+        mLcdDensity = findPreference("lcd_density_setup");
+        mLcdDensity.setOnPreferenceChangeListener(this);
+        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
+        try {
+            newDensityValue = Integer.parseInt(currentProperty);
+        } catch (Exception e) {
+            prefs.removePreference(mLcdDensity);
+        }
+        mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
-      
         mHighEndGfx = (CheckBoxPreference) findPreference(PREF_HIGH_END_GFX);
         mHighEndGfx.setOnPreferenceChangeListener(this);
 
@@ -89,9 +102,13 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
             category.removePreference(mHighEndGfx);
         }
 
+        mRamBar = findPreference(PREF_RECENTS_RAM_BAR);
+        mRamBar.setOnPreferenceChangeListener(this);
+        updateRamBar();
+
     }
 
-      private void updateCustomLabelTextSummary() {
+    private void updateCustomLabelTextSummary() {
         mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_LABEL);
         if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
@@ -101,14 +118,27 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateRamBar() {
+        int ramBarMode = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_MODE, 0);
+        if (ramBarMode != 0)
+            mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_enabled));
+        else
+            mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_disabled));
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+        updateRamBar();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        updateRamBar();
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -121,7 +151,7 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HIGH_END_GFX_ENABLED,
                     (Boolean) newValue ? 1 : 0);
-             return true;
+            return true;
         }
         return false;
     }

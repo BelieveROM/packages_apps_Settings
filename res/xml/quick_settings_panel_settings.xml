@@ -23,15 +23,15 @@
         android:title="@string/title_general" >
 
         <CheckBoxPreference
-            android:key="quick_pulldown"
-            android:title="@string/title_quick_pulldown"
-            android:summary="@string/summary_quick_pulldown" />
+            android:key="disable_quick_settings"
+            android:title="@string/disable_quick_settings_panel"
+            android:defaultValue="true"
+            android:summary="@string/disable_quick_settings_panel_summary" />
 
         <CheckBoxPreference
             android:key="collapse_panel"
             android:title="@string/title_collapse_panel"
             android:summary="@string/summary_collapse_panel" />
-
 
         <ListPreference
             android:key="quick_pulldown"
@@ -47,13 +47,11 @@
             android:entryValues="@array/no_notifications_pulldown_values"
             android:persistent="false" />
 
-
         <PreferenceScreen
             android:key="quicksettings_tiles_style"
             android:fragment="com.android.settings.slim.quicksettings.QuickSettingsTilesStyle"
             android:title="@string/quicksettings_tiles_style"
             android:summary="@string/summary_quicksettings_tiles_style" />
-
 
     </PreferenceCategory>
 

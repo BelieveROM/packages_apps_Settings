@@ -17,13 +17,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/lock_screen_title" >
 
-     <PreferenceScreen
-         android:key="screen_security"
-         android:fragment="com.android.settings.SecuritySettings"
-         android:title="@string/screen_security_category"
-         android:summary="@string/screen_security_summary">
-         <extra android:name="slim_security" android:value="true" />
-     </PreferenceScreen>
+         <PreferenceScreen
+             android:key="screen_security"
+             android:fragment="com.android.settings.SecuritySettings"
+             android:title="@string/screen_security_category"
+             android:summary="@string/screen_security_summary">
+             <extra android:name="slim_security" android:value="true" />
+         </PreferenceScreen>
 
          <PreferenceScreen
              android:key="lock_screen_widgets"
@@ -96,9 +96,11 @@
             android:entryValues="@array/lockscreen_battery_status_values"
             android:defaultValue="0" />
 
-         <CheckBoxPreference
-            android:key="lockscreen_camera_widget"
-            android:title="@string/lockscreen_camera_widget_title" />
+         <PreferenceScreen
+            android:fragment="com.android.settings.slim.LockscreenButtons"
+            android:key="lockscreen_buttons"
+            android:title="@string/lockscreen_buttons_title"
+            android:summary="@string/lockscreen_buttons_summary" />
 
     </PreferenceCategory>
 

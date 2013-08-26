@@ -19,7 +19,7 @@
     android:title="@string/sound_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
- <!--   <com.android.settings.slim.IncreasingRingPreference
+  <com.android.settings.slim.IncreasingRingPreference
         android:key="increasing_ring"
         android:title="@string/increasing_ring_title"
         android:dialogTitle="@string/increasing_ring_title"
@@ -31,11 +31,6 @@
         android:fragment="com.android.settings.slim.QuietHours"
         android:title="@string/quiet_hours_title" />
 
-    <CheckBoxPreference
-        android:key="camera_sounds"
-        android:title="@string/camera_sounds_title"
-        android:summary="@string/camera_sounds_summary"
-        android:defaultValue="true" />  -->
 
     <CheckBoxPreference
         android:key="lock_volume_keys"
@@ -43,7 +38,7 @@
         android:summary="@string/sound_lock_volume_keys_summary"
         android:persistent="false" />
 
- <!--   <CheckBoxPreference
+    <CheckBoxPreference
         android:key="volume_keys_control_ring_stream"
         android:title="@string/volume_keys_control_ring_stream"
         android:summary="@string/volume_keys_control_ring_stream_summary"
@@ -59,7 +54,7 @@
         android:key="volume_adjust_sounds"
         android:title="@string/volume_adjust_sounds_enable_title"
         android:summary="@string/volume_adjust_sounds_enable_summary"
-        android:persistent="false" />  -->
+        android:persistent="false" />
 
     <ListPreference
         android:key="volume_overlay"
@@ -73,7 +68,7 @@
         android:summary="@string/volbtn_music_controls_summary"
         android:persistent="false" />
 
- <!--   <PreferenceCategory
+    <PreferenceCategory
         android:title="@string/notifications_category_title" />
 
         <ListPreference
@@ -117,6 +112,6 @@
             android:key="power_notifications_ringtone"
             android:title="@string/power_notifications_ringtone_title"
             android:dependency="power_notifications"
-            android:persistent="false" />  -->
+            android:persistent="false" />
 
 </PreferenceScreen>

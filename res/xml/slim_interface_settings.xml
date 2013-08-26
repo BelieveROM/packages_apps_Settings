@@ -19,33 +19,14 @@
     android:title="@string/interface_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-  
     <PreferenceScreen
-        android:key="status_bar"
-        android:fragment="com.android.settings.slim.StatusBar"
-        android:title="@string/status_bar_title" />
+        android:key="lcd_density_setup"
+        android:fragment="com.android.settings.slim.DensityChanger"
+        android:title="@string/lcd_density_title"
+        android:summary="@string/lcd_density_summary" />
 
-    <PreferenceScreen
-        android:key="notification_drawer"
-        android:fragment="com.android.settings.slim.NotificationDrawerSettings"
-        android:title="@string/notification_drawer_title" />
-
-     <PreferenceScreen
-            android:key="lock_screen_settings"
-            android:fragment="com.android.settings.slim.LockscreenInterface"
-            android:title="@string/lock_screen_title"
-            android:summary="@string/lock_screen_summary" />
-
-    <PreferenceScreen
-        android:key="themes_settings"
-        android:title="@string/themes_settings_title">
-
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.tmobile.themechooser"
-            android:targetClass="com.tmobile.themechooser.ThemeChooser" />
-
-    </PreferenceScreen>
+   
+    
 
     <PreferenceCategory
         android:key="interface_settings_action_prefs"
@@ -66,6 +47,11 @@
             android:title="@string/high_end_gfx_title"
             android:summary="@string/high_end_gfx_summary"
             android:defaultValue="true" />
+
+        <PreferenceScreen
+            android:key="recents_ram_bar"
+            android:fragment="com.android.settings.slim.RamBar"
+            android:title="@string/ram_bar" />
 
     </PreferenceCategory>
 
