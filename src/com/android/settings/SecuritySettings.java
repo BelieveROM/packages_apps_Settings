@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
- * Modifications Copyright (C) 2012 CyanogenMod
+ * Modifications Copyright (C) 2012 CyanogenMod and Slimroms
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,15 +36,18 @@ import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     static final String TAG = "SecuritySettings";
 
     // Lock Settings
+    private static final String PREF_LOCK_SCREEN = "lock_screen_settings";
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
     private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
             "biometric_weak_improve_matching";
@@ -86,14 +90,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
-    // Cyanogenmod Additions
+    // Slim Additions
     private static final String SLIDE_LOCK_DELAY_TOGGLE = "slide_lock_delay_toggle";
     private static final String SLIDE_LOCK_TIMEOUT_DELAY = "slide_lock_timeout_delay";
     private static final String SLIDE_LOCK_SCREENOFF_DELAY = "slide_lock_screenoff_delay";
     private static final String MENU_UNLOCK_PREF = "menu_unlock";
     private static final String HOME_UNLOCK_PREF = "home_unlock";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "quick_unlock_control";
+    private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
     private static final String KEY_VIBRATE_PREF = "lockscreen_vibrate";
+    private static final String KEY_SMS_SECURITY_CHECK_PREF = "sms_security_check_limit";
+    private static final String PREF_ADVANCED_REBOOT_KEY = "advanced_reboot";
 
     private PackageManager mPM;
     DevicePolicyManager mDPM;
@@ -121,7 +128,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private boolean mIsPrimary;
 
-    // Cyanogenmod Additions
+    // Slim Additions
     private CheckBoxPreference mSlideLockDelayToggle;
     private ListPreference mSlideLockTimeoutDelay;
     private ListPreference mSlideLockScreenOffDelay;
@@ -129,6 +136,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mMenuUnlock;
     private CheckBoxPreference mHomeUnlock;
     private CheckBoxPreference mQuickUnlockScreen;
+    private CheckBoxPreference mLockBeforeUnlock;
+    private ListPreference mSmsSecurityCheck;
+    private ListPreference mAdvancedReboot;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,47 +160,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
-        // CM - allows for calling the settings screen with stock or cm view
-        boolean isCmSecurity = false;
+        // SLIM - allows for calling the settings screen with stock or slim view
+        boolean isSlimSecurity = false;
         Bundle args = getArguments();
         if (args != null) {
-            isCmSecurity = args.getBoolean("cm_security");
+            isSlimSecurity = args.getBoolean("slim_security");
         }
         ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
 
-        // Add options for lock/unlock screen
-        int resid = 0;
-        if (!mLockPatternUtils.isSecure()) {
-            // if there are multiple users, disable "None" setting
-            UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-            List<UserInfo> users = mUm.getUsers(true);
-            final boolean singleUser = users.size() == 1;
-
-            if (singleUser && mLockPatternUtils.isLockScreenDisabled()) {
-                resid = R.xml.security_settings_lockscreen;
-            } else {
-                resid = R.xml.security_settings_chooser;
-            }
-        } else if (mLockPatternUtils.usingBiometricWeak() &&
-                mLockPatternUtils.isBiometricWeakInstalled()) {
-            resid = R.xml.security_settings_biometric_weak;
-        } else {
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
-                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    resid = R.xml.security_settings_pattern;
-                    break;
-                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                    resid = R.xml.security_settings_pin;
-                    break;
-                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    resid = R.xml.security_settings_password;
-                    break;
-            }
-        }
-        addPreferencesFromResource(resid);
-
+        // Add package manager to check if features are available
+        PackageManager pm = getPackageManager();
 
         // Add options for device encryption
         DevicePolicyManager dpm =
@@ -198,6 +177,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
+        int resid = 0;
         if (!mIsPrimary) {
             // Rename owner info settings
             Preference ownerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
@@ -210,7 +190,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        if (mIsPrimary && !isCmSecurity) {
+        if (mIsPrimary && !isSlimSecurity) {
             switch (dpm.getStorageEncryptionStatus()) {
             case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
                 // The device is currently encrypted.
@@ -223,58 +203,98 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        // lock after preference
-        mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
-        if (mLockAfter != null) {
-            setupLockAfterPreference();
-            updateLockAfterPreferenceSummary();
-        } else if (!mLockPatternUtils.isLockScreenDisabled() && isCmSecurity) {
-            addPreferencesFromResource(R.xml.security_settings_slide_delay_cyanogenmod);
+        if (isSlimSecurity) {
+            // remove the security options in slim view due it is redundant
+            removePreference(PREF_LOCK_SCREEN);
+            // Add options for lock/unlock screen
+            if (!mLockPatternUtils.isSecure()) {
+                // if there are multiple users, disable "None" setting
+                UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+                List<UserInfo> users = mUm.getUsers(true);
+                final boolean singleUser = users.size() == 1;
 
-            mSlideLockDelayToggle = (CheckBoxPreference) root
-                    .findPreference(SLIDE_LOCK_DELAY_TOGGLE);
-            mSlideLockDelayToggle.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_LOCK_SLIDE_DELAY_TOGGLE, 0) == 1);
+                if (singleUser && mLockPatternUtils.isLockScreenDisabled()) {
+                    resid = R.xml.security_settings_lockscreen;
+                } else {
+                    resid = R.xml.security_settings_chooser;
+                }
+            } else if (mLockPatternUtils.usingBiometricWeak() &&
+                    mLockPatternUtils.isBiometricWeakInstalled()) {
+                resid = R.xml.security_settings_biometric_weak;
+            } else {
+                switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+                    case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                        resid = R.xml.security_settings_pattern;
+                        break;
+                    case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                        resid = R.xml.security_settings_pin;
+                        break;
+                    case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+                    case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                    case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+                        resid = R.xml.security_settings_password;
+                        break;
+                }
+            }
+            addPreferencesFromResource(resid);
 
-            mSlideLockTimeoutDelay = (ListPreference) root
-                    .findPreference(SLIDE_LOCK_TIMEOUT_DELAY);
-            int slideTimeoutDelay = Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
-            mSlideLockTimeoutDelay.setValue(String.valueOf(slideTimeoutDelay));
-            updateSlideAfterTimeoutSummary();
-            mSlideLockTimeoutDelay.setOnPreferenceChangeListener(this);
+            if (!mIsPrimary) {
+                // Rename owner info settings
+                Preference ownerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
+                if (ownerInfoPref != null) {
+                    ownerInfoPref.setTitle(R.string.user_info_settings_title);
+                }
+            }
 
-            mSlideLockScreenOffDelay = (ListPreference) root
-                    .findPreference(SLIDE_LOCK_SCREENOFF_DELAY);
-            int slideScreenOffDelay = Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
-            mSlideLockScreenOffDelay.setValue(String.valueOf(slideScreenOffDelay));
-            updateSlideAfterScreenOffSummary();
-            mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
-        }
+            // lock after preference
+            mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
+            if (mLockAfter != null) {
+                setupLockAfterPreference();
+                updateLockAfterPreferenceSummary();
+            } else if (!mLockPatternUtils.isLockScreenDisabled() && isSlimSecurity) {
+                addPreferencesFromResource(R.xml.security_settings_slide_delay_slim);
 
-        if (isCmSecurity) {
-            // visible pattern
-            mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
-            
-            // visible error pattern
-            mVisibleErrorPattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_ERROR_PATTERN);
-            // visible dots
-            mVisibleDots = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_DOTS);
+                mSlideLockDelayToggle = (CheckBoxPreference) root
+                        .findPreference(SLIDE_LOCK_DELAY_TOGGLE);
+                mSlideLockDelayToggle.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.SCREEN_LOCK_SLIDE_DELAY_TOGGLE, 0) == 1);
+
+                mSlideLockTimeoutDelay = (ListPreference) root
+                        .findPreference(SLIDE_LOCK_TIMEOUT_DELAY);
+                int slideTimeoutDelay = Settings.System.getInt(resolver,
+                        Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
+                mSlideLockTimeoutDelay.setValue(String.valueOf(slideTimeoutDelay));
+                updateSlideAfterTimeoutSummary();
+                mSlideLockTimeoutDelay.setOnPreferenceChangeListener(this);
+
+                mSlideLockScreenOffDelay = (ListPreference) root
+                        .findPreference(SLIDE_LOCK_SCREENOFF_DELAY);
+                int slideScreenOffDelay = Settings.System.getInt(resolver,
+                        Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
+                mSlideLockScreenOffDelay.setValue(String.valueOf(slideScreenOffDelay));
+                updateSlideAfterScreenOffSummary();
+                mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
+            }
 
             // lock instantly on power key press
             mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
                     KEY_POWER_INSTANTLY_LOCKS);
             checkPowerInstantLockDependency();
 
-            // Add the additional CyanogenMod settings
-            addPreferencesFromResource(R.xml.security_settings_cyanogenmod);
+            // Add the additional Slim settings
+            addPreferencesFromResource(R.xml.security_settings_slim);
 
             // Quick Unlock Screen Control
             mQuickUnlockScreen = (CheckBoxPreference) root
                     .findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
             mQuickUnlockScreen.setChecked(Settings.System.getInt(resolver,
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
+
+            // Lock before Unlock
+            mLockBeforeUnlock = (CheckBoxPreference) root
+                    .findPreference(LOCK_BEFORE_UNLOCK);
+            mLockBeforeUnlock.setChecked(Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, 0) == 1);
 
             // Menu Unlock
             mMenuUnlock = (CheckBoxPreference) root.findPreference(MENU_UNLOCK_PREF);
@@ -300,18 +320,26 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mMenuUnlock.setEnabled(false);
                 mHomeUnlock.setEnabled(false);
                 mVibratePref.setEnabled(false);
+                if (mLockPatternUtils.isLockPatternEnabled()) {
+                    mLockBeforeUnlock.setEnabled(true);
+                } else {
+                    mLockBeforeUnlock.setEnabled(false);
+                }
             // disable menu unlock and vibrate on unlock options if
             // using PIN/password as primary lock screen or as
             // backup to biometric
             } else if (mLockPatternUtils.isLockPasswordEnabled()) {
                 mQuickUnlockScreen.setEnabled(true);
+                mLockBeforeUnlock.setEnabled(true);
                 mMenuUnlock.setEnabled(false);
                 mHomeUnlock.setEnabled(false);
                 mVibratePref.setEnabled(false);
             // Disable the quick unlock if its not using PIN/password
             // as a primary lock screen or as a backup to biometric
             } else {
-                mQuickUnlockScreen.setEnabled(false);            }
+                mQuickUnlockScreen.setEnabled(false);
+                mLockBeforeUnlock.setEnabled(false);
+            }
 
             // Disable the MenuUnlock setting if no menu button is available
             if (getActivity().getApplicationContext().getResources()
@@ -332,6 +360,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
 
+        // visible error pattern
+        mVisibleErrorPattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_ERROR_PATTERN);
+
+        // visible dots
+        mVisibleDots = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_DOTS);
+
         // lock instantly on power key press
         mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
                 KEY_POWER_INSTANTLY_LOCKS);
@@ -342,8 +376,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             PreferenceGroup securityCategory = (PreferenceGroup)
                     root.findPreference(KEY_SECURITY_CATEGORY);
-            if (securityCategory != null && mVisiblePattern != null &&	                    
-                mVisibleErrorPattern != null && mVisibleDots != null) {
+            if (securityCategory != null && mVisiblePattern != null &&
+                    mVisibleErrorPattern != null && mVisibleDots != null) {
                 securityCategory.removePreference(mVisiblePattern);
                 securityCategory.removePreference(mVisibleErrorPattern);
                 securityCategory.removePreference(mVisibleDots);
@@ -351,7 +385,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         // Append the rest of the settings
-        if (!isCmSecurity) {
+        if (!isSlimSecurity) {
             addPreferencesFromResource(R.xml.security_settings_misc);
 
             // Do not display SIM lock for devices without an Icc card
@@ -379,7 +413,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
                 final int storageSummaryRes =
                     mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
-                    : R.string.credential_storage_type_software;
+                            : R.string.credential_storage_type_software;
                 credentialStorageType.setSummary(storageSummaryRes);
 
                 mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
@@ -389,8 +423,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             // Application install
             PreferenceGroup deviceAdminCategory= (PreferenceGroup)
-                root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
-
+                    root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
             mToggleAppInstallation = (CheckBoxPreference) findPreference(
                     KEY_TOGGLE_INSTALL_APPLICATIONS);
             mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
@@ -398,6 +431,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // Side loading of apps.
             mToggleAppInstallation.setEnabled(mIsPrimary);
 
+            mAdvancedReboot = (ListPreference) root.findPreference(PREF_ADVANCED_REBOOT_KEY);
+            mAdvancedReboot.setValue(String.valueOf(Settings.Secure.getInt(
+                    getActivity().getContentResolver(),
+                    Settings.Secure.ADVANCED_REBOOT, 1)));
+            mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
+            mAdvancedReboot.setOnPreferenceChangeListener(this);
 
             // Package verification, only visible to primary user and if enabled
             mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
@@ -405,40 +444,45 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 if (isVerifierInstalled()) {
                     mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
                 } else {
-                    mToggleVerifyApps.setChecked(false);
-                    mToggleVerifyApps.setEnabled(false);
+                    if (deviceAdminCategory != null) {
+                        deviceAdminCategory.removePreference(mToggleVerifyApps);
+                    } else {
+                        mToggleVerifyApps.setEnabled(false);
+                    }
                 }
-            } else {
-                if (deviceAdminCategory != null) {
-                    deviceAdminCategory.removePreference(mToggleVerifyApps);
+
+                // App security settings
+                addPreferencesFromResource(R.xml.security_settings_app_slim);
+                mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
+                if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                    mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
+                    mSmsSecurityCheck.setOnPreferenceChangeListener(this);
+                    int smsSecurityCheck = Integer.valueOf(mSmsSecurityCheck.getValue());
+                    updateSmsSecuritySummary(smsSecurityCheck);
+                }
+           
+             }
+
+            mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
+            if (mNotificationAccess != null) {
+                final int total = NotificationAccessSettings.getListenersCount(mPM);
+                if (total == 0) {
+                    if (deviceAdminCategory != null) {
+                        deviceAdminCategory.removePreference(mNotificationAccess);
+                    }
                 } else {
-                    mToggleVerifyApps.setEnabled(false);
+                    final int n = getNumEnabledNotificationListeners();
+                    if (n == 0) {
+                        mNotificationAccess.setSummary(getResources().getString(
+                                R.string.manage_notification_access_summary_zero));
+                    } else {
+                        mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
+                                R.plurals.manage_notification_access_summary_nonzero,
+                                n, n)));
+                    }
                 }
             }
         }
-
-        mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
-        if (mNotificationAccess != null) {
-            final int total = NotificationAccessSettings.getListenersCount(mPM);
-            if (total == 0) {
-                PreferenceGroup deviceAdminCategory= (PreferenceGroup)
-                        root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
-                if (deviceAdminCategory != null) {
-                    deviceAdminCategory.removePreference(mNotificationAccess);
-                }
-            } else {
-                final int n = getNumEnabledNotificationListeners();
-                if (n == 0) {
-                    mNotificationAccess.setSummary(getResources().getString(
-                            R.string.manage_notification_access_summary_zero));
-                } else {
-                    mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
-                            R.plurals.manage_notification_access_summary_nonzero,
-                            n, n)));
-                }
-            }
-        }
-
         return root;
     }
 
@@ -528,6 +572,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
         mSlideLockTimeoutDelay.setSummary(entries[best]);
+    }
+
+    private void updateSmsSecuritySummary(int i) {
+        String message = getString(R.string.sms_security_check_limit_summary, i);
+        mSmsSecurityCheck.setSummary(message);
     }
 
     private void updateSlideAfterScreenOffSummary() {
@@ -637,14 +686,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (mVisiblePattern != null) {
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
         }
-        
         if (mVisibleErrorPattern != null) {
             mVisibleErrorPattern.setChecked(lockPatternUtils.isShowErrorPath());
         }
         if (mVisibleDots != null) {
             mVisibleDots.setChecked(lockPatternUtils.isVisibleDotsEnabled());
         }
-        
         if (mPowerButtonInstantlyLocks != null) {
             mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
         }
@@ -657,6 +704,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (mResetCredentials != null) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
+
+        
     }
 
     @Override
@@ -711,16 +760,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mSlideLockDelayToggle) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.SCREEN_LOCK_SLIDE_DELAY_TOGGLE, isToggled(preference) ? 1 : 0);
-        } if (preference == mQuickUnlockScreen) {
+        } else if (preference == mQuickUnlockScreen) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, isToggled(preference) ? 1 : 0);
+        } else if (preference == mLockBeforeUnlock) {
+            Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);
         } else if (preference == mMenuUnlock) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.MENU_UNLOCK_SCREEN, isToggled(preference) ? 1 : 0);
         } else if (preference == mHomeUnlock) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.HOME_UNLOCK_SCREEN, isToggled(preference) ? 1 : 0);
-        }  else if (preference == mVibratePref) {
+        } else if (preference == mVibratePref) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_VIBRATE_ENABLED, isToggled(preference) ? 1 : 0);
         } else if (preference == mShowPassword) {
@@ -793,6 +845,18 @@ public class SecuritySettings extends SettingsPreferenceFragment
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, slideScreenOffDelay);
             updateSlideAfterScreenOffSummary();
+        } else if (preference == mSmsSecurityCheck) {
+            int smsSecurityCheck = Integer.valueOf((String) value);
+            Settings.Global.putInt(getContentResolver(), Settings.Global.SMS_OUTGOING_CHECK_MAX_COUNT,
+                     smsSecurityCheck);
+            updateSmsSecuritySummary(smsSecurityCheck);
+        } else if (preference == mAdvancedReboot) {
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.ADVANCED_REBOOT,
+                    Integer.valueOf((String) value));
+            mAdvancedReboot.setValue(String.valueOf(value));
+            mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
+            return true;
         }
         return true;
     }
@@ -807,4 +871,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
         startActivity(intent);
     }
+
+   
 }

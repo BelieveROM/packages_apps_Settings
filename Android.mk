@@ -13,8 +13,6 @@ LOCAL_CERTIFICATE := platform
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
-LOCAL_AAPT_FLAGS += -c zz_ZZ
-
 LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
 LOCAL_AAPT_FLAGS := --extra-packages com.koushikdutta.superuser:com.koushikdutta.widgets --auto-add-overlay
 
