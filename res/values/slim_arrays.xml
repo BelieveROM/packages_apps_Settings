@@ -473,18 +473,7 @@
         <item>3</item>
     </string-array>
 
-    <!-- MediaScanner behavior on boot -->
-    <string-array name="media_scanner_on_boot_entries">
-        <item>@string/media_scanner_on_boot_enabled</item>
-        <item>@string/media_scanner_on_boot_ask</item>
-        <item>@string/media_scanner_on_boot_disabled</item>
-    </string-array>
-
-    <string-array name="media_scanner_on_boot_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+   
 
     <!--- Volume key cursor control -->
     <string-array name="volume_key_cursor_control_entries">
@@ -1015,18 +1004,7 @@
         <item>2</item>
     </string-array>
 
-    <!-- Profiles -->
-    <string-array name="power_menu_profiles_entries">
-        <item>@string/power_menu_profiles_disabled</item>
-        <item>@string/power_menu_profiles_lock</item>
-        <item>@string/power_menu_profiles_all</item>
-    </string-array>
-
-    <string-array name="power_menu_profiles_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+     
 
     <string-array name="less_notification_sounds_entries">
         <item>@string/less_notification_sounds_default</item>

@@ -38,14 +38,12 @@ public class PowerMenu extends SettingsPreferenceFragment implements
     private static final String KEY_REBOOT = "power_menu_reboot";
     private static final String KEY_SCREENSHOT = "power_menu_screenshot";
     private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
-    private static final String KEY_PROFILES = "power_menu_profiles";
     private static final String KEY_AIRPLANE = "power_menu_airplane";
     private static final String KEY_SOUND = "power_menu_sound";
 
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
     private ListPreference mExpandedDesktopPref;
-    private ListPreference mProfilesPref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mSoundPref;
 
@@ -84,18 +82,7 @@ public class PowerMenu extends SettingsPreferenceFragment implements
             Log.e(TAG, "Error getting navigation bar status");
         }
 
-        mProfilesPref = (ListPreference) findPreference(KEY_PROFILES);
-        mProfilesPref.setOnPreferenceChangeListener(this);
-        int mProfileShow = Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_PROFILES_ENABLED, 1);
-        mProfilesPref.setValue(String.valueOf(mProfileShow));
-        mProfilesPref.setSummary(mProfilesPref.getEntries()[mProfileShow]);
-
-        // Only enable if System Profiles are also enabled
-        boolean enabled = Settings.System.getInt(getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
-        mProfilesPref.setEnabled(enabled);
-
+       
         mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
         mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1));
@@ -124,13 +111,7 @@ public class PowerMenu extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_DESKTOP_MODE, expandedDesktopValue);
             mExpandedDesktopPref.setSummary(mExpandedDesktopPref.getEntries()[index]);
             return true;
-        } else if (preference == mProfilesPref) {
-            int mProfileShow = Integer.valueOf((String) newValue);
-            int index = mProfilesPref.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_PROFILES_ENABLED, mProfileShow);
-            mProfilesPref.setSummary(mProfilesPref.getEntries()[index]);
-            return true;
+      
         }
         return false;
     }
