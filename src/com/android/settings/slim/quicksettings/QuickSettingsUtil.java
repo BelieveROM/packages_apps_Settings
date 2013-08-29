@@ -60,6 +60,7 @@ public class QuickSettingsUtil {
     public static final String TILE_NFC = "toggleNfc";
     public static final String TILE_FCHARGE = "toggleFCharge";
     public static final String TILE_QUIETHOURS = "toggleQuietHours";
+    public static final String TILE_PIETOGGLE = "togglePieToggle";
     public static final String TILE_VOLUME = "toggleVolume";
     public static final String TILE_EXPANDED_DESKTOP = "toggleExpandedDesktop";
     public static final String TILE_CUSTOMSHORTCUT = "toggleCustomShortcut";
@@ -143,6 +144,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_QUIETHOURS, new QuickSettingsUtil.TileInfo(
                 TILE_QUIETHOURS, R.string.title_tile_quiet_hours,
                 "com.android.systemui:drawable/ic_qs_quiet_hours_off", true));
+        TILES.put(TILE_PIETOGGLE, new QuickSettingsUtil.TileInfo(
+                TILE_PIETOGGLE, R.string.title_tile_pie_toggle,
+                "com.android.systemui:drawable/ic_qs_pie_off", true));
         TILES.put(TILE_REBOOT, new QuickSettingsUtil.TileInfo(
                 TILE_REBOOT, R.string.title_tile_reboot,
                 "com.android.systemui:drawable/ic_qs_reboot", true));
