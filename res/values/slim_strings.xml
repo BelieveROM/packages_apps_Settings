@@ -278,11 +278,6 @@
     <string name="pref_purgeable_assets_title">Allow purging of assets</string>
     <string name="pref_purgeable_assets_summary">Purging of bitmap memory assets allows the freeing of more RAM when needed (requires reboot)</string>
 
-    <!-- Performance Settings : Dithering -->
-    <string name="pref_use_dithering_title">Surface improvement</string>
-    <string name="dithering_no_dither">Disable dithering</string>
-    <string name="dithering_color_banding">Fix color banding (default)</string>
-    <string name="dithering_blur_effect">Fix color banding and blur effect</string>
 
     <!-- Performance Settings : 16bpp Alpha -->
     <string name="pref_use_16bpp_alpha_title">16bit transparency</string>
@@ -812,7 +807,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="development_tools_title">Launch Tools</string>
 
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
-    <string name="show_dev_countdown">You are now <xliff:g id="step_count">%1$d</xliff:g> steps away from enabling developer options.</string>
+    <string name="show_dev_countdown">STOP <xliff:g id="step_count">%1$d</xliff:g> Im not that type of Button..Fresh!</string>
 
     <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
