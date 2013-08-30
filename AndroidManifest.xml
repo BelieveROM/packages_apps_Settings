@@ -1578,6 +1578,7 @@
         <activity android:name=".slim.quicksettings.QuickSettings" />
         <activity android:name=".slim.quicksettings.QuickSettingsTilesStyle" />
         <activity android:name=".slim.NotificationDrawerStyle" />
+        <activity android:name=".cyanogenmod.HaloSettings" /> 
         <activity android:name=".ApnEditor" />
 
         <activity
