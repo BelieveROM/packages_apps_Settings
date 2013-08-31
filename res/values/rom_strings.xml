@@ -736,6 +736,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="qs_reset">Reset</string>
     <string name="qs_style_reset_message">Reset all colors to default?</string>
 
+    <!-- OnClick Fliptile animation -->
+    <string name="flip_qs_tiles_title">Flip tiles</string>
+    <string name="flip_qs_tiles_summary">Flips the tiles on touch</string> 
+
     <!-- Reset tiles -->
     <string name="tiles_reset_title">Reset</string>
     <string name="tiles_reset_message">Restore the default displayed tiles and layout?</string>
