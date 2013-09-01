@@ -15,7 +15,7 @@ limitations under the License.
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/halo_settings">
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     	<SwitchPreference
             android:key="halo_enabled"
