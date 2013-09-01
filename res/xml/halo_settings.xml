@@ -24,7 +24,7 @@ limitations under the License.
             android:defaultValue="false" />
 
 	<PreferenceCategory
-        android:key="halo_status"
+        android:key="halo_status_category"
         android:title="@string/halo_status_category"> 
 
         <ListPreference
@@ -74,7 +74,7 @@ limitations under the License.
 	</PreferenceCategory>
 
 	<PreferenceCategory
-        android:key="halo_colors"
+        android:key="halo_colors_category"
         android:title="@string/halo_colors_category">
 
         <CheckBoxPreference
