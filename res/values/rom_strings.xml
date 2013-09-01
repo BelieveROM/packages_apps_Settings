@@ -1480,6 +1480,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_navigation_header">Halo</string> 
 
     <string name="halo_category">HALO</string>
+    <string name="halo_status_category">Status</string>
+    <string name="halo_colors_category">Colors</string> 
     <string name="halo_hide_title">Hide HALO after activity</string>
     <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>
     <string name="halo_reversed_title">Reverse HALO gestures</string>
@@ -1497,6 +1499,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_size_large">Large</string>
     <string name="halo_size_gigantic">Gigantic</string>
     <string name="halo_size_monster">Monster</string>
+
+     <string name="halo_colors_title">Custom colors</string>
+    <string name="halo_colors_summary">Enable custom colors for HALO instead of the default theme colors</string>
+    <string name="halo_circle_color_title">Circle color</string>
+    <string name="halo_bubble_color_title">Speech bubble color</string>
+    <string name="halo_bubble_text_color_title">Speech bubble text color</string>
+    <string name="halo_effect_color_title">Effect color</string>
+    <string name="halo_effect_color_summary">Requires a systemui restart</string> 
 
     <string name="halo_enabled_title">Enable HALO</string>
     <string name="halo_enabled_summary">Completely enable or disable HALO</string>
