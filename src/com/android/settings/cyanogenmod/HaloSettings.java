@@ -16,67 +16,86 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.INotificationManager;
 import android.content.Context;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
-import android.os.RemoteException;
+import android.os.Handler;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.view.IWindowManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.util.Helpers;
+import net.margaritov.preference.colorpicker.ColorPickerPreference; 
 
 public class HaloSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_HALO_ENABLED = "halo_enabled"; 
+    private static final String KEY_HALO_ENABLED = "halo_enabled";
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
     private static final String KEY_HALO_PAUSE = "halo_pause";
     private static final String KEY_HALO_SIZE = "halo_size";
+    private static final String KEY_HALO_COLORS = "halo_colors";
+    private static final String KEY_HALO_CIRCLE_COLOR = "halo_circle_color";
+    private static final String KEY_HALO_EFFECT_COLOR = "halo_effect_color";
+    private static final String KEY_HALO_BUBBLE_COLOR = "halo_bubble_color";
+    private static final String KEY_HALO_BUBBLE_TEXT_COLOR = "halo_bubble_text_color";
     private static final String KEY_WE_WANT_POPUPS = "show_popup";
     
-    private CheckBoxPreference mHaloEnabled;    
     private ListPreference mHaloState;
+    private ListPreference mHaloSize;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
-    private CheckBoxPreference mHaloPause;	
-    private ListPreference mHaloSize;
+    private CheckBoxPreference mHaloPause;
+	
+    private CheckBoxPreference mHaloColors;
     private CheckBoxPreference mWeWantPopups;
+    private ColorPickerPreference mHaloCircleColor;
+    private ColorPickerPreference mHaloEffectColor;
+    private ColorPickerPreference mHaloBubbleColor;
+    private ColorPickerPreference mHaloBubbleTextColor;
+    private SwitchPreference mHaloEnabled; 
     
     private Context mContext;
     private INotificationManager mNotificationManager;
-    private int mAllowedLocations;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	
+	PreferenceScreen prefSet = getPreferenceScreen();
+        mContext = getActivity();
 
         addPreferencesFromResource(R.xml.halo_settings);
-        PreferenceScreen prefSet = getPreferenceScreen();
-        mContext = getActivity();
 
         mNotificationManager = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE)); 
 
-	mHaloEnabled = (CheckBoxPreference) findPreference(KEY_HALO_ENABLED);
-        mHaloEnabled.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.HALO_ENABLED, 0) == 1); 
+	mHaloEnabled = (SwitchPreference) findPreference(KEY_HALO_ENABLED);
+        mHaloEnabled.setChecked(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.HALO_ENABLED,
+                0) == 1);
+        mHaloEnabled.setOnPreferenceChangeListener(this); 
 
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
@@ -91,7 +110,7 @@ public class HaloSettings extends SettingsPreferenceFragment
                 Settings.System.HALO_REVERSED, 1) == 1);
 
 	int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
-        mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
+        mHaloPause = (CheckBoxPreference) findPreference(KEY_HALO_PAUSE);
         mHaloPause.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_PAUSE, isLowRAM) == 1);
 
@@ -109,7 +128,23 @@ public class HaloSettings extends SettingsPreferenceFragment
             // So what
         }
         mHaloSize.setOnPreferenceChangeListener(this);
-    }
+    
+	mHaloColors = (CheckBoxPreference) findPreference(KEY_HALO_COLORS);
+        mHaloColors.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_COLORS, 0) == 1);
+
+        mHaloEffectColor = (ColorPickerPreference) findPreference(KEY_HALO_EFFECT_COLOR);
+        mHaloEffectColor.setOnPreferenceChangeListener(this);
+
+        mHaloCircleColor = (ColorPickerPreference) findPreference(KEY_HALO_CIRCLE_COLOR);
+        mHaloCircleColor.setOnPreferenceChangeListener(this);
+
+        mHaloBubbleColor = (ColorPickerPreference) findPreference(KEY_HALO_BUBBLE_COLOR);
+        mHaloBubbleColor.setOnPreferenceChangeListener(this);
+
+        mHaloBubbleTextColor = (ColorPickerPreference) findPreference(KEY_HALO_BUBBLE_TEXT_COLOR);
+        mHaloBubbleTextColor.setOnPreferenceChangeListener(this);
+        } 
 
     private boolean isHaloPolicyBlack() {
         try {
@@ -122,11 +157,7 @@ public class HaloSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-	if  (preference == mHaloEnabled) {  
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HALO_ENABLED, mHaloEnabled.isChecked()
-                    ? 1 : 0);   
-        } else if (preference == mHaloHide) {	
+        if (preference == mHaloHide) {	
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_HIDE, mHaloHide.isChecked()
                     ? 1 : 0);	
@@ -138,12 +169,22 @@ public class HaloSettings extends SettingsPreferenceFragment
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_PAUSE, mHaloPause.isChecked()
                     ? 1 : 0);	
-        }
+        } else if (preference == mHaloColors) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_COLORS, mHaloColors.isChecked()
+                    ? 1 : 0);
+            Helpers.restartSystemUI();
+        }   
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHaloState) {
+	if (preference == mHaloEnabled) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_ENABLED,
+                    (Boolean) newValue ? 1 : 0);
+            return true;
+        } else if (preference == mHaloState) {
             boolean state = Integer.valueOf((String) newValue) == 1;
             try {
                 mNotificationManager.setHaloPolicyBlack(state);
@@ -153,9 +194,44 @@ public class HaloSettings extends SettingsPreferenceFragment
             return true;
 	} else if (preference == mHaloSize) {
             float haloSize = Float.valueOf((String) newValue);
+	    int index = mHaloSize.findIndexOfValue((String) newValue);
             Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.HALO_SIZE, haloSize);
+	    mHaloSize.setSummary(mHaloSize.getEntries()[index]);
             return true;
+	} else if (preference == mHaloCircleColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_CIRCLE_COLOR, intHex);
+            return true;
+        } else if (preference == mHaloEffectColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_EFFECT_COLOR, intHex);
+            Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mHaloBubbleColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_BUBBLE_COLOR, intHex);
+            return true;
+        } else if (preference == mHaloBubbleTextColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_BUBBLE_TEXT_COLOR, intHex);
+            return true; 
 	} else if (preference == mWeWantPopups) {
             boolean checked = (Boolean) newValue; 
                         Settings.System.putBoolean(getActivity().getContentResolver(),
