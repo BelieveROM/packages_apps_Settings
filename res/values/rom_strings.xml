@@ -1186,44 +1186,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="wifi_setting_priority_summary">Specify the priority of Wi-Fi networks</string>
     <string name="wifi_priority_disabled">Enable Wi-Fi to specify the priority</string>
 
-    <!-- Menu option to delete all Wi-Fi networks -->
-    <string name="wifi_menu_forget_all">Forget all networks</string>
-
-    <string name="wifi_channel">Channel</string>
-    <string name="wifi_mhz">MHz</string>
-    <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
-    <string name="wifi_scan_always_confirm_allow">Allow</string>
-    <string name="wifi_scan_always_confirm_deny">Deny</string>
-
-    <string name="wifi_mode">Mode</string>
-    <string name="wifi_mode_ibss">Ad-Hoc (IBSS) Network</string>
-    <string name="wifi_mode_ibss_short">Ad-Hoc</string>
-
-    <string name="wifi_ibss_freq_title">Channel / Frequency</string>
-
+   
     <!-- Stylus Icon -->
     <string name="stylus_icon_enabled_title">Show icon when using stylus</string>
     <string name="stylus_icon_enabled_summary">Show the pointer icon when hovering or drawing with the stylus</string>
-
-    <!-- Stylus Gestures -->
-    <string name="gestures_settings_title">Stylus gestures</string>
-    <string name="category_spen_title">Stylus gestures</string>
-    <string name="enable_subcat_title">Stylus</string>
-    <string name="enable_spen_title_head">Enable stylus gestures</string>
-    <string name="enable_spen_summary_head">Allows stylus button swipe gestures to launch custom actions. Warning: Applications will not be able to recieve input fired by holding stylus button.</string>
-    <string name="gestures_subcat_title">Gestures</string>
-    <string name="gestures_left_spen_title_head">Left swipe</string>
-    <string name="gestures_left_spen_summary_head">Allows to launch custom action on left swipe</string>
-    <string name="gestures_right_spen_title_head">Right swipe</string>
-    <string name="gestures_right_spen_summary_head">Allows to launch custom action on right swipe</string>
-    <string name="gestures_up_spen_title_head">Up swipe</string>
-    <string name="gestures_up_spen_summary_head">Allows to launch custom action on up swipe</string>
-    <string name="gestures_down_spen_title_head">Down swipe</string>
-    <string name="gestures_down_spen_summary_head">Allows to launch custom action on down swipe</string>
-    <string name="gestures_long_spen_title_head">Long press</string>
-    <string name="gestures_long_spen_summary_head">Allows to launch custom action on long press</string>
-    <string name="gestures_double_spen_title_head">Double tap</string>
-    <string name="gestures_double_spen_summary_head">Allows to launch custom action on double tap</string>
 
     <!-- Gestures Options -->
     <string name="gestures_action_empty">None</string>
@@ -1476,16 +1442,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
 
-    <!-- Display : Animation options -->
-    <string name="display_category_animation_options_title">Animation options</string>
-    <string name="system_power_crt_screen_off_title">CRT screen off</string>
-    <string name="system_power_crt_screen_off_summary">Screen will animate an Electron Beam when turned off</string>
-    <string name="system_power_crt_mode_title">CRT animation mode</string>
-    <string name="system_power_crt_mode_dialog_title">Show CRT animation</string>
-    <string name="system_power_crt_mode_horizontal">Portrait horizontal</string>
-    <string name="system_power_crt_mode_vertical">Portrait vertical</string>
-    <string name="system_power_crt_mode_both">Orientation dependent</string>
-
+  
     <!-- HALO -->
     <string name="app_halo_label_black">Blacklist HALO notifications</string>
     <string name="app_halo_label_white">Whitelist HALO notifications</string> 
