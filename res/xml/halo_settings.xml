@@ -14,14 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+<<<<<<< HEAD
 <PreferenceScreen 
 	xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> 28fe5d53d9ce699c76d89f337d3bfd8f73fbe6cc
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     	<SwitchPreference
             android:key="halo_enabled"
             android:title="@string/halo_enabled_title"
+<<<<<<< HEAD
             android:summary="@string/halo_enabled_summary" />
+=======
+            android:summary="@string/halo_enabled_summary"
+            android:defaultValue="false" />
+>>>>>>> 28fe5d53d9ce699c76d89f337d3bfd8f73fbe6cc
 
 	<PreferenceCategory
         android:key="halo_status_category"
