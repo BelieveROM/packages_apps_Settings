@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen 
+	xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     	<SwitchPreference
             android:key="halo_enabled"
             android:title="@string/halo_enabled_title"
-            android:summary="@string/halo_enabled_summary"
-            android:defaultValue="false" />
+            android:summary="@string/halo_enabled_summary" />
 
 	<PreferenceCategory
         android:key="halo_status_category"
@@ -32,8 +32,8 @@ limitations under the License.
             android:dialogTitle="@string/halo_state_title"
             android:title="@string/halo_state_title"
             android:summary="@string/halo_state_summary"
+	    android:dependency="halo_enabled"
             android:entries="@array/entries_halo_state"
-	    android:dependency="halo_enabled" 
             android:entryValues="@array/values_halo_state" />
 
         <CheckBoxPreference
@@ -50,20 +50,20 @@ limitations under the License.
 	    android:dependency="halo_enabled" 
             android:defaultValue="true" />
 
+	<CheckBoxPreference
+            android:key="halo_pause"
+            android:title="@string/halo_pause_title"
+            android:summary="@string/halo_pause_summary"
+	    android:dependency="halo_enabled" />
+
 	<ListPreference
             android:key="halo_size"
             android:dialogTitle="@string/halo_size_title"
             android:title="@string/halo_size_title"
+	    android:dependency="halo_enabled" 
             android:summary="@string/halo_size_summary"
             android:entries="@array/entries_halo_size"
-	    android:dependency="halo_enabled" 
             android:entryValues="@array/values_halo_size" />
-
-    	<CheckBoxPreference
-            android:key="halo_pause"
-            android:title="@string/halo_pause_title"
-	    android:dependency="halo_enabled" 
-            android:summary="@string/halo_pause_summary" />
 
 	<CheckBoxPreference
             android:key="show_popup"
@@ -111,7 +111,7 @@ limitations under the License.
             android:title="@string/halo_bubble_text_color_title"
             android:dependency="halo_colors"
             android:defaultValue="0xFFFFFFFF" />
-        
+
     </PreferenceCategory>
 
 </PreferenceScreen> 

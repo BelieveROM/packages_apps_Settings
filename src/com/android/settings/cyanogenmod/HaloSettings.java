@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2013 ParanoidAndroid Project
+* Copyright (C) 2012 ParanoidAndroid Project
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public class HaloSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         mContext = getActivity();
 
-	addPreferencesFromResource(R.xml.halo_settings);
+        addPreferencesFromResource(R.xml.halo_settings);
 
         mNotificationManager = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
