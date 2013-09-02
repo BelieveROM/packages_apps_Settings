@@ -1134,7 +1134,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="widgets_delete_message">Delete current widget?</string>
     <string name="widgets_shift_left">Shift left</string>
     <string name="widgets_shift_right">Shift right</string>
-    <string name="widgets_delete">Delete</string>
     <string name="widgets_shifted_left">Widget shifted one position to the left</string>
     <string name="widgets_shifted_right">Widget shifted one position to the right</string>
     <string name="widgets_shifted_end">Widget cannot be shifted into this direction</string>
@@ -1186,19 +1185,22 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="wifi_setting_priority_summary">Specify the priority of Wi-Fi networks</string>
     <string name="wifi_priority_disabled">Enable Wi-Fi to specify the priority</string>
 
+    <!-- Menu option to delete all Wi-Fi networks -->
+    <string name="wifi_menu_forget_all">Forget all networks</string>
+
+    <string name="wifi_channel">Channel</string>
+    <string name="wifi_mhz">MHz</string>
+    <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
+    <string name="wifi_scan_always_confirm_allow">Allow</string>
+    <string name="wifi_scan_always_confirm_deny">Deny</string>
+
+    <string name="wifi_mode">Mode</string>
+    <string name="wifi_mode_ibss">Ad-Hoc (IBSS) Network</string>
+    <string name="wifi_mode_ibss_short">Ad-Hoc</string>
+
+    <string name="wifi_ibss_freq_title">Channel / Frequency</string>
    
-    <!-- Stylus Icon -->
-    <string name="stylus_icon_enabled_title">Show icon when using stylus</string>
-    <string name="stylus_icon_enabled_summary">Show the pointer icon when hovering or drawing with the stylus</string>
-
-    <!-- Gestures Options -->
-    <string name="gestures_action_empty">None</string>
-    <string name="gestures_action_home">Go To Home</string>
-    <string name="gestures_action_back">Emulate Back Key</string>
-    <string name="gestures_action_menu">Emulate Menu Key</string>
-    <string name="gestures_action_search">Invoke Search</string>
-    <string name="gestures_action_recent">Recent Applications</string>
-
+       
     <!-- High End Gfx Effects -->
     <string name="high_end_gfx_title">High-end graphic effects</string>
     <string name="high_end_gfx_summary">Enable graphic effects disabled on lower end devices</string>
