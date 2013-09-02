@@ -34,12 +34,17 @@
         android:title="@string/performance_settings_title"
         android:fragment="com.android.settings.slim.PerformanceSettings" />
 
+    <!-- ChainFire SU -->
     <PreferenceScreen
-        android:id="@+id/superuser"
-        android:fragment="com.android.settings.cyanogenmod.superuser.PolicyNativeFragment"
-        android:title="@string/superuser" />
+        android:key="su"
+        android:title="SuperUser">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="eu.chainfire.supersu"
+            android:targetClass="eu.chainfire.supersu.MainActivity" />
+    </PreferenceScreen>
 
-    <!-- Believeupdater -->
+    <!-- BelieveInfo -->
     <PreferenceScreen
         android:key="about"
         android:title="Changelog/Features">
