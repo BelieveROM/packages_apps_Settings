@@ -4533,4 +4533,11 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+
+        <!-- Share BelieveROM -->
+    <string name="share_believerom">Share BelieveROM</string>
+    <string name="share_believerom_summary">Tell people how amazing it is to BELIEVE</string>
+    <string name="share_message">Try BelieveROM! \nWebsite : http://teamsourcery.com \nIRC : #believeROM</string>
+    <string name="share_chooser_title">Via..</string>
+
 </resources>

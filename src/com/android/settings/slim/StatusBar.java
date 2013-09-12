@@ -26,6 +26,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
@@ -43,7 +44,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
     private static final String STATUS_BAR_QUICK_PEEK = "status_bar_quick_peek";
-    
+    private static final String PREF_STATUS_BAR_TRAFFIC_ENABLE = "status_bar_traffic_enable";
+    private static final String PREF_STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
 
     private StatusBarBrightnessChangedObserver mStatusBarBrightnessChangedObserver;
 
@@ -53,14 +55,28 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mStatusBarBrightnessControl;
     private ListPreference mStatusBarAutoHide;
     private CheckBoxPreference mStatusBarQuickPeek;
+    private CheckBoxPreference mStatusBarTraffic_enable;
+    private CheckBoxPreference mStatusBarTraffic_hide;
     
+    private static ContentResolver mContentResolver;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.status_bar);
-
+	
+	ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefSet = getPreferenceScreen();
+	mContentResolver = getContentResolver();
+
+	mStatusBarTraffic_enable = (CheckBoxPreference) prefSet.findPreference(PREF_STATUS_BAR_TRAFFIC_ENABLE);
+        mStatusBarTraffic_enable.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 0) == 1));
+
+        mStatusBarTraffic_hide = (CheckBoxPreference) prefSet.findPreference(PREF_STATUS_BAR_TRAFFIC_HIDE);
+        mStatusBarTraffic_hide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_TRAFFIC_HIDE, 1) == 1)); 
 
         mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
         int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -69,7 +85,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntry());
         mStatusBarCmSignal.setOnPreferenceChangeListener(this);
 
-       
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                             Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
@@ -137,6 +152,22 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         }
         return false;
     }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	boolean value;
+	if (preference == mStatusBarTraffic_enable) {
+	value = mStatusBarTraffic_enable.isChecked();
+	Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+		Settings.System.STATUS_BAR_TRAFFIC_ENABLE, value ? 1: 0);
+	return true;
+	} else if (preference == mStatusBarTraffic_hide) {
+            value = mStatusBarTraffic_hide.isChecked();
+      Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRAFFIC_HIDE, value ? 1 : 0);
+        return true; 
+	}
+	return super.onPreferenceTreeClick(preferenceScreen, preference);
+	}
 
     private void updateClockStyleDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),

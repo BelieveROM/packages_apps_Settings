@@ -1516,6 +1516,7 @@
         <activity android:name=".slim.NotificationDrawerStyle" />
         <activity android:name=".cyanogenmod.HaloSettings" /> 
         <activity android:name=".ApnEditor" />
+	<activity android:name=".cyanogenmod.StatusBarTrafficColor" />
 
         <activity
             android:name=".slim.DensityChanger"

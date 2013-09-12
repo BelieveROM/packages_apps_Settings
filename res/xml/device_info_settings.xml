@@ -17,6 +17,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/about_settings">
 
+	<!-- Share BelieveROM ROM -->
+        <Preference android:key="share"
+            android:title="@string/share_believerom" 
+            android:summary="@string/share_believerom_summary" />
+ 
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status" 
