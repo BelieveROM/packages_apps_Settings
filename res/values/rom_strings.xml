@@ -1541,7 +1541,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="network_speed_color_summary">Change the color of network speed indicator</string>
 
     <!-- Active Display -->
-    <string name="ad_customizations_title">Customizations</string>
     <string name="lock_screen_ad_category">Active Display</string>
     <string name="ad_settings_title">Active display</string>
     <string name="ad_settings_summary">Change active display settings</string>
@@ -1557,10 +1556,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="ad_redisplay_title">Redisplay notifications</string>
     <string name="ad_brightness_title">Notification brightness</string>
     <string name="ad_brightness_summary">Brightness level for displaying notifications when automatic brightness is not enabled.</string>
-    <string name="ad_show_date_title">Show date</string>
-    <string name="ad_show_date_summary">Show the date above the clock</string>
-    <string name="ad_show_ampm_title">Show AM/PM</string>
-    <string name="ad_show_ampm_summary">Show AM/PM indicator next to time when using 12hour format</string>
     <string name="ad_redisplay_never">Never</string>
     <string name="ad_redisplay_1m">1 minute</string>
     <string name="ad_redisplay_5m">5 minutes</string>
