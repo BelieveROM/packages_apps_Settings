@@ -47,6 +47,15 @@
             android:key="lockscreen_alpha"
             android:title="@string/lockscreen_alpha_title" />
 
+	<!-- Active display -->
+       <PreferenceScreen
+            android:key="active_display"
+            android:fragment="com.android.settings.believe.ActiveDisplaySettings"
+            android:title="@string/ad_settings_title"
+            android:summary="@string/ad_settings_summary">
+
+	</PreferenceScreen>
+
     </PreferenceCategory>
 
     <PreferenceCategory
